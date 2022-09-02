@@ -1,0 +1,118 @@
+.Header {
+    // background-color: purple;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    padding-top: 35px;
+
+    .container-fluid {
+        padding: 0 60px;
+    }
+
+    .header-content {
+
+        // display: flex;
+        // flex-wrap: wrap;
+        // align-items: center;
+        .logo {
+            padding-bottom: 20px;
+
+            img {
+                max-width: 161px;
+                vertical-align: middle;
+                height: auto;
+                display: inline-block;
+            }
+        }
+
+        nav {
+            margin-left: auto;
+
+            ul {
+
+                .album {
+                    position: relative;
+
+                    &:hover {
+                        .drop-menu {
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+
+                    .drop-menu {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 200px;
+                        background-color: #00b9c6;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.4s ease-in-out;
+                        margin-top: 20px;
+
+                        li {
+                            display: block;
+                            padding: 0;
+                            border-bottom: 1px solid rgba(255, 255, 255, 0.30);
+
+                            a {
+                                display: block;
+                                text-transform: uppercase;
+                                letter-spacing: 0;
+                                padding: 15px;
+
+                                &:hover {
+                                    color: #fff;
+                                    background-color: #fcb62b;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                li {
+                    display: inline-block;
+                    padding: 0 25px 20px;
+                    position: relative;
+
+
+                    a {
+                        display: inline-block;
+                        color: #ffffff;
+                        text-decoration: none;
+                        font-size: 16px;
+                        text-transform: uppercase;
+                        font-family: 'Barlow', sans-serif;
+                        font-weight: 700;
+                        letter-spacing: 2.4px;
+                        transition: all 0.4s ease-in-out;
+
+                        &:hover {
+                            color: #00b9c6;
+                        }
+                    }
+                }
+            }
+        }
+
+        .social {
+            ul {
+                li {
+                    margin-left: 18px;
+                    padding-bottom: 20px;
+                    color: #ffffff;
+                    cursor: pointer;
+                    transition: all 0.4s ease-in-out;
+
+                    &:hover {
+                        color: #f559a4;
+                    }
+                }
+            }
+        }
+    }
+
+}
