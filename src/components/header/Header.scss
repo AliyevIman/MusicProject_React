@@ -95,7 +95,11 @@
                         }
                     }
                 }
+
+
             }
+
+      
         }
 
         .social {
@@ -112,6 +116,33 @@
                     }
                 }
             }
+        }
+        .menu-bar {
+            display: none;
+
+            i {
+                color: #fff;
+            }
+        }
+    }
+
+}
+
+@media (max-width:1024px) {
+    .Header {
+        .header-content {
+            nav {
+                display: none;
+            }
+
+            .social {
+                display: none;
+            }
+            .menu-bar{
+                display: block;
+            }
+
+
         }
     }
 

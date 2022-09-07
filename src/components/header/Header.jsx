@@ -5,6 +5,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import MenuIcon from "@mui/icons-material/Menu";
 const Header = () => {
   return (
     <div className="Header">
@@ -14,7 +15,7 @@ const Header = () => {
             <img className="img-fluid" src="/image/logo.png" alt="logo" />
           </div>
           <nav>
-            <ul className="list-unstyled d-flex">
+            <ul className="list-unstyled d-flex menu">
               <li>
                 <a href="#">Home</a>
               </li>
@@ -41,6 +42,7 @@ const Header = () => {
               <li>
                 <a href="#">Contact</a>
               </li>
+            
             </ul>
           </nav>
           <div className="social">
@@ -59,6 +61,11 @@ const Header = () => {
               </li>
             </ul>
           </div>
+          <div className="menu-bar">
+                <i>
+                  <MenuIcon />
+                </i>
+              </div>
         </div>
       </div>
     </div>
