@@ -1,0 +1,110 @@
+// .album{
+//     padding: 5rem 0;
+//     background-color: red;
+// }
+
+#pager-section {
+    position: relative;
+    padding: 140px 0;
+
+    .album-bg {
+        background-image: url("../../../public/image/bg4.jpg");
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+        background-position: center center;
+    }
+
+    .pager-content {
+        h2 {
+            font-size: 60px;
+            line-height: 1.4;
+            color: #f2f2f2;
+            font-size: 75px;
+            text-transform: capitalize;
+        }
+    }
+
+}
+
+.album-block {
+    padding: 140px 0;
+    position: relative;
+
+    .fixed-bg {
+        background-color: black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+        background-position: center center;
+    }
+
+    .section-title {
+        padding-bottom: 34px;
+        position: relative;
+        color: #fff;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #a829aa;
+            width: 85px;
+            height: 3px;
+        }
+    }
+
+    .album-list {
+        margin-bottom: -89px;
+
+        .album-col {
+            text-align: center;
+            margin-bottom: 84px;
+            transition: transform 0.4s cubic-bezier(0.45, 0.66, 0.27, 0.99), opacity 0.3s;
+            transform: translateY(0);
+            opacity: 1;
+            &:hover{
+                transform: translateY(-30px);
+            }
+
+            .album-thumb {
+                margin-bottom: 26px;
+
+                a {
+                    transition: all 0.4s ease-in-out;
+                    color: inherit;
+                }
+            }
+            .album-detail{
+                h3{
+                  
+                    a{
+                        display: inline-block;
+                        text-decoration: none;
+                        color: #ffffff;
+                        font-size: 23px;
+                        margin-bottom: 5px;
+                    }
+                }
+               span{
+                display: block;
+                color: #f559a4;
+                font-size: 20px;
+                font-family: 'Barlow';
+               } 
+            }
+        }
+    }
+}

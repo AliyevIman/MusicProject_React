@@ -1,0 +1,5 @@
+[29048:2756:2022-9-8 13:49:20.804] Main Start
+[29048:2756:2022-9-8 13:49:20.804] Command line:"C:\Users\Iman\Desktop\my-app\public\image\Zoom_cm_fo42lnktZ9vvrZo4_mYLcB5xN30ruY++QxNjgWsjsBh18YgHPtK7lq@WXGs03q750GBrx8v_k8cfd3f776a34e1d7_.exe"  Instance:0x310000 Show State:1
+[29048:2756:2022-9-8 13:49:20.805] [app_init] init_opener_worker failed.
+[29048:2756:2022-9-8 13:49:20.805] MyMain Failed to init.
+[29048:2756:2022-9-8 13:49:20.805] Main End

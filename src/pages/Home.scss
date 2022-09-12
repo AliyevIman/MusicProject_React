@@ -126,11 +126,12 @@
             border-radius: 50%;
 
             .MuiSvgIcon-root {
-                width: 4rem;    
+                width: 4rem;
                 height: 2em;
             }
         }
-        h3{
+
+        h3 {
             color: #fff;
             text-transform: capitalize;
             // font-size: 33px;
@@ -141,20 +142,84 @@
     }
 }
 
-.iframe {
-    width: 100%;
-    height: 100%;
+.Gallery {
+    padding: 140px 0;
+    position: relative;
 
-    iframe {
-        position: fixed;
-        z-index: 9;
-        background-color: rgba(128, 128, 128, 0.503);
-
+    .fixed-gal {
+        background-color: #000000;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        top: 0;
-        padding: 4rem;
-        left: 50%;
-        transform: translate(-50%);
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+        background-position: center center;
+    }
+
+    .gallery-section {
+        .gallery-col {
+            height: 100%;
+            // padding: 0 12px;
+
+            &.overlay2 {
+                position: relative;
+
+                &:hover {
+                    &::before {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    .plus {
+                        opacity: 1;
+                        visibility: visible;
+                        top: 50%;
+                    }
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 185, 198, 0.74);
+                    transition: all 0.4s ease-in-out;
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+
+            .plus {
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s ease-in-out;
+                position: absolute;
+                top: 0%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                .plus-icon {
+                    opacity: 1;
+                    visibility: visible;
+                    display: inline-block;
+                    color: #fff;
+                    border: 1px solid #fff;
+                    border-radius: 50%;
+                    // font-size: 30px;
+                    width: 110px;
+                    height: 110px;
+                   
+                    text-align: center;
+                    line-height: 110px;
+                    svg{
+                        font-size: 40px;
+                    }
+                }
+            }
+        }
     }
 }

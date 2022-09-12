@@ -17,16 +17,16 @@ const MusicPlayer = () => {
     request(BASE_URL + "api/Musician/GetAll").then(setMusic);
   }, []);
 
-  useEffect(() => {
-    console.log(Music);
-  }, [Music]);
+  // useEffect(() => {
+  //   console.log(Music);
+  // }, [Music]);
 
 
   return (
     <>
       <ReactJkMusicPlayer
         audioLists={Music}
-        autoPlay={false}
+        autoPlay={true}
         // toggleMode={false}
         // mode="full"
       />
