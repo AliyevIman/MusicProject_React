@@ -2,9 +2,11 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import { Cartreducer } from "./Reducer/CartReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { AlbumReducer } from "./Reducer/AlbumReducer";
 
 const reducer   =combineReducers({
-    cart:Cartreducer
+    cart:Cartreducer,
+    album:AlbumReducer
 })
 // const userInfoFromLS=localStorage.getItem("userInfo") ?
 //  JSON.parse(localStorage.getItem("userInfo"))
@@ -18,7 +20,6 @@ const initialState={
     cart:{
         cartitems:cartItemsFromLocal
     }
-    
 }
 const middleware = [thunk];
 const store=createStore(

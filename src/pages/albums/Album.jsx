@@ -1,37 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-import SpotifyPlayer from 'react-spotify-player';
-import { BASE_URL } from '../../api/BaseConfig';
-import "./Album.scss"
+// import './App.css';
+// import Player from './Player/Player';
+// import { songsdata } from './Player/audios';
+import {  useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../api/BaseConfig";
 
 const Album = () => {
-  const {id} = useParams();
-  const [album, setAlbum] = useState(null)
-  const getAlbumById = (myId) => {
-    fetch(`${BASE_URL}api/Albums/music/${myId}`)
+  const { id } = useParams();
+  const [songs, setSongs] = useState(null);
+
+  const getAlbum = (myid) => {
+    fetch(`${BASE_URL}api/Albums/${myid}`)
       .then((c) => c.json())
-      .then((c) => setAlbum(c));
+      .then((c) => setSongs(c));
   };
   useEffect(() => {
-    getAlbumById(id);
+    getAlbum(id);
   }, [id]);
-  console.log(album);
-    const size = {
-        width: '100%',
-        height: 300,
-      };
-      const view = 'list'; // or 'coverart'
-      const theme = 'black'; // or 'white'
+ 
+
+
+
   return (
+      <>
 
-    <div className='album'> 
-    <SpotifyPlayer
-      uri="https://open.spotify.com/playlist/37i9dQZF1E35FLHCmERIh3?si=1bc499427d4549a1"
-      size={size}
-      view={view}
-      theme={theme}
-    /></div>
-  )
-}
+      </>
+  
+  );
+};
 
-export default Album
+export default Album;

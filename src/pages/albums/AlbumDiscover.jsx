@@ -1,9 +1,35 @@
+import { Album } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../../api/BaseConfig";
+import { AlbumAction } from "../../Redux/Actions/AlbumAction";
 import "./Album.scss";
 const AlbumDiscover = () => {
   const [album, setAlbum] = useState([]);
+ 
+  const dispatch = useDispatch();
+  const { albumitems } = useSelector((state) => state.cart);
+
+  const submitform = (obj) => {
+    // e.preventDefault();
+    const {musicUrl,name}= obj.music;
+    // const {musicUrl} = obj.music.musicUrl[0];
+    // const {name} =obj.music.name[0];
+    const nameMusician = obj.musician.name;
+    const cover = obj.albumPhoto;
+
+    const objSingle = [
+      {
+      singer: nameMusician,
+      cover,
+      name,
+      musicSrc: musicUrl,
+      } 
+    ]; 
+    console.log(objSingle);
+    dispatch(AlbumAction(objSingle));
+  };
   const getAlbum = () => {
     fetch(`${BASE_URL}api/Albums/GetAll`)
       .then((c) => c.json())
@@ -12,7 +38,10 @@ const AlbumDiscover = () => {
   useEffect(() => {
     getAlbum();
   }, []);
-console.log(album);
+  // const handlerAlbum = (id) => {
+  //   dispatch(AlbumAction(id));
+  // };
+
   return (
     <>
       <section id="pager-section">
@@ -41,13 +70,13 @@ console.log(album);
               <div className="col-lg-4 col-md-6 col-sm-6">
                 <div className="album-col">
                   <div className="album-thumb">
-                    <Link to={`/album/${c.id}`}>
+                    <div onClick={() => submitform(c)}>
                       <img className="img-fluid" src={c.albumPhoto} alt="ef" />
-                    </Link>
+                    </div>
                   </div>
                   <div className="album-detail">
                     <h3>
-                      <Link to={`/album/${c.id}`}>{c.name}</Link>
+                      <p onClick={() => submitform(c)}>{c.name}</p>
                     </h3>
                     <span>{c.musician.name}</span>
                   </div>

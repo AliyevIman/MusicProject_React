@@ -13,6 +13,7 @@ export const AddToCart=(id,qyt)=>async(dispatch,getState)=>{
        quantity:qyt
 
     }
+    
     dispatch({
         type:ADD_TO_CART,
         payload:ticket

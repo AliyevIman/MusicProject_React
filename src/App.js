@@ -6,6 +6,7 @@ import MyRoutes from './myRoutes/MyRoutes';
 import Footer from './components/footer/Footer';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
+import MusicPlayer from './components/MusicPlayer/MusicPlayer';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
   <BrowserRouter>
      <Provider store={store}>
       <Header/>
+      <MusicPlayer/>
        <MyRoutes/>
       <Footer/>
       </Provider>

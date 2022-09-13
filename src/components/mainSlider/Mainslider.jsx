@@ -137,7 +137,7 @@ const Mainslider = () => {
           </div>
         </div>
       </div> */}
-      <MusicPlayer/>
+      {/* <MusicPlayer/> */}
     </section>
   );
 };

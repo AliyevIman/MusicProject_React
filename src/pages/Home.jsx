@@ -11,6 +11,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import AddIcon from '@mui/icons-material/Add';
 import FsLightbox from "fslightbox-react";
 import { Skeleton } from "@mui/material";
+import { PushSpinner, SequenceSpinner } from "react-spinners-kit";
 // import Iframe from "react-iframe-click";
 const Home = () => {
   const [musician, setMusician] = useState([]);
@@ -100,7 +101,7 @@ const Home = () => {
                     </div>
                   </div>
                 )
-            ):<Skeleton variant="text" animation="wave" sx={{ fontSize: '1rem' }}/>  }
+            ):   <SequenceSpinner size={30} color="#686769"  />  }
         </div>
       </section>
 
