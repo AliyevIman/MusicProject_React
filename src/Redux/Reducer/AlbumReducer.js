@@ -14,7 +14,7 @@ export const AlbumReducer  = (state={albumitems:[]},action)=>{
                 c.id === exititem.id ? item:c
                 )
                 }
-            }
+            }   
             else{
                 return {...state,albumitems:[...state.albumitems,item]}
             }

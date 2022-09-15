@@ -8,10 +8,12 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { useDispatch, useSelector } from "react-redux";
-
+import { logoutAction } from "../../Redux/Actions/UserAction";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 const Header = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const myUser = useSelector((state) => state.loginUser);
 
   return (
     <div className="Header">
@@ -19,8 +21,7 @@ const Header = () => {
         <div className="header-content d-flex justify-content-between align-item-center">
           <div className="logo w-100">
             <Link to="/">
-            <img className="img-fluid" src="/image/logo.png" alt="logo" />
-
+              <img className="img-fluid" src="/image/logo.png" alt="logo" />
             </Link>
           </div>
           <nav>
@@ -42,12 +43,7 @@ const Header = () => {
               <li>
                 <a href="#">Live</a>
               </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Gallery</a>
-              </li>
+
               <li>
                 <a href="#">Contact</a>
               </li>
@@ -80,6 +76,34 @@ const Header = () => {
               </li>
               <li>
                 <YouTubeIcon />
+              </li>
+              <li className="personal">
+                <div className="personal-icon d-flex">
+                <PersonOutlineIcon /> <span>Account</span>
+                </div>
+                <ul className="list-unstyled account-ul">
+                  {myUser && myUser.userInfo && myUser.userInfo.token ? (
+                    <li className="email-box">
+                      <Link className="user-email" to="#">
+                        <span>{myUser.userInfo.email}</span>
+                      </Link>
+                      <button onClick={() => dispatch(logoutAction())}>
+                        {" "}
+                        Logout{" "}
+                      </button>
+                    </li>
+                  ) : (
+                    <>
+                      {" "}
+                      <li>
+                        <Link to="/login">Login</Link>
+                      </li>
+                      <li>
+                        <Link to="/register">Register</Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
               </li>
             </ul>
           </div>

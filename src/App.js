@@ -18,7 +18,6 @@ function App() {
        <MyRoutes/>
       <Footer/>
       </Provider>
-
    </BrowserRouter>
 </>
   );

@@ -16,5 +16,6 @@ import {
         type: ALBUM_GETALL,
         payload: objSingle
     })
+    localStorage.setItem("albumitems", JSON.stringify(getState().album.albumitems))
 
 }

@@ -39,7 +39,7 @@
                         .drop-menu {
                             opacity: 1;
                             visibility: visible;
-                        }
+                        }   
                     }
 
                     .drop-menu {
@@ -78,11 +78,12 @@
                     padding: 0 25px 20px;
                     position: relative;
 
-.reqem{
-    position: absolute;
-    top: 0;
-    right: 0;
-}
+                    .reqem {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
+
                     a {
                         display: inline-block;
                         color: #ffffff;
@@ -103,7 +104,7 @@
 
             }
 
-      
+
         }
 
         .social {
@@ -119,8 +120,41 @@
                         color: #f559a4;
                     }
                 }
+
+                .personal {
+                    position: relative;
+                    padding: 0%;
+                    &:hover {
+                        ul {
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+
+                    .account-ul {
+                        position: absolute;
+                        // top: 100%;
+                        left: -50%;
+                        width: 150px;
+                        border-radius: 5px;
+                        background-color: #fff;
+                        box-shadow: 0 20px 0 0 ;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.4s ease-in-out;
+                        margin-top: 20px;
+                        .email-box{
+                            .user-email{
+                                text-decoration: none;
+                                color: #f559a4;
+                            }
+                        }
+                    }
+                }
+
             }
         }
+
         .menu-bar {
             display: none;
 
@@ -142,7 +176,8 @@
             .social {
                 display: none;
             }
-            .menu-bar{
+
+            .menu-bar {
                 display: block;
             }
 

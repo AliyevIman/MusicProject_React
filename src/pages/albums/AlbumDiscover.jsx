@@ -13,20 +13,20 @@ const AlbumDiscover = () => {
 
   const submitform = (obj) => {
     // e.preventDefault();
-    const {musicUrl,name}= obj.music;
+    const {musicUrl,name}= obj.music[0];
     // const {musicUrl} = obj.music.musicUrl[0];
     // const {name} =obj.music.name[0];
     const nameMusician = obj.musician.name;
     const cover = obj.albumPhoto;
 
-    const objSingle = [
+    const objSingle = 
       {
       singer: nameMusician,
       cover,
       name,
       musicSrc: musicUrl,
       } 
-    ]; 
+    ; 
     console.log(objSingle);
     dispatch(AlbumAction(objSingle));
   };
