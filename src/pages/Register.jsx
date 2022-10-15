@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerAction } from '../Redux/Actions/UserAction';
 
 const Register = () => {
@@ -20,7 +20,7 @@ const Register = () => {
     };
     useEffect(()=>{
       if(myUserInfo.userInfo && myUserInfo.userInfo.status===201){
-        navi("/")
+        navi("/login")
        }
     },[myUserInfo.userInfo,navi])
 
@@ -113,13 +113,13 @@ const Register = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block mb-4">
+            <button  type="submit" className="btn btn-primary btn-block mb-4">
               Sign Up
             </button>
 
             <div className="text-center">
               <p>
-                Not a member? <a href="#!">Register</a>
+                Not a member? <Link to="/register">Register</Link>
               </p>
               <p>or sign up with:</p>
               <button type="button" className="btn btn-link btn-floating mx-1">

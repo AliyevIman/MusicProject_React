@@ -3,13 +3,14 @@ import thunk from "redux-thunk";
 import { Cartreducer } from "./Reducer/CartReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { AlbumReducer } from "./Reducer/AlbumReducer";
-import { LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
+import { BeArtistReducer, LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
 
 const reducer   =combineReducers({
     cart:Cartreducer,
     album:AlbumReducer,
     register:RegisterReducer,
-    loginUser :LoginReducer
+    loginUser :LoginReducer,
+    role:BeArtistReducer
     
 })
 const userInfoFromLS=localStorage.getItem("userInfo") ?
@@ -18,8 +19,14 @@ const userInfoFromLS=localStorage.getItem("userInfo") ?
 const cartItemsFromLocal = localStorage.getItem("cartitems" )?
 JSON.parse(localStorage.getItem("cartitems")):[] 
 
+const roleInfoFromLS=localStorage.getItem("roleInfo")?
+ JSON.parse(localStorage.getItem("roleInfo"))
+ :null
+
+
 const albumItemsFromLocal = localStorage.getItem("albumitems" )?
 JSON.parse(localStorage.getItem("albumitems")):[] 
+
 const initialState={
     loginUser:{
         userInfo:userInfoFromLS
@@ -29,6 +36,9 @@ const initialState={
     },
     cart:{
         cartitems:cartItemsFromLocal
+    },
+    role:{
+        roleInfo:roleInfoFromLS
     }
 }
 const middleware = [thunk];

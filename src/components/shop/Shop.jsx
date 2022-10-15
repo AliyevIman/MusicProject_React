@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, iconButtonClasses } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import jsPDF from "jspdf";
@@ -13,7 +13,11 @@ import "../shop/Shop.scss";
 import { useEffect } from "react";
 import PdfViewerComponent from "../ticketPDF/PdfViewerComponent";
 import { useState } from "react";
+import { EffectCoverflow } from "swiper";
+import { Alarm } from "@mui/icons-material";
+import Swal from "sweetalert2";
 const Shop = () => {
+  const { userInfo } = useSelector(st => st.loginUser);
   const { cartitems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const handlerAddToCart = (id, symbol) => {
@@ -34,42 +38,43 @@ const Shop = () => {
   //     this.state ={};
   // }
   // console.log(cartitems);
-  
-   const  generatePDF = () => {
-    
-      
-    
-      let name =   document.querySelectorAll("#nm")
-      for (let g = 0; g < name.length; g++) {
-        let qty = document.querySelectorAll("#quant")
+
+  const generatePDF = () => {
+
+
+    let name = document.querySelectorAll("#nm")
+    for (let g = 0; g < name.length; g++) {
+      let qty = document.querySelectorAll("#quant")
       let count = qty[g].value;
       for (let i = 0; i < count; i++) {
 
         var doc = new jsPDF("p", "pt");
 
         doc.text(20, 20, `This is the ${name[g].textContent}`);
-       
- 
-       doc.text(20, 100, "This is the thrid title.");
-       doc.addFont("helvetica", "normal");
- 
+
+
+        doc.text(20, 100, "This is the thrid title.");
+        doc.addFont("helvetica", "normal");
+
         doc.save("ticket.pdf");
-        
+
       }
-        
-      }
-     
-      
-   
-     
- 
-      
-   
-   
-      
-    };
- 
- 
+
+    }
+
+
+
+
+
+
+
+  };
+const handleUSer=()=>{
+  userInfo ? generatePDF() : Swal.fire(
+    'Zehmet olmasa qeydiyyatdan keciniz '
+  )
+}
+
 
   return (
     <section className="shop">
@@ -171,11 +176,9 @@ const Shop = () => {
                     .toFixed(2)}
                   ${" "}
                 </p>
-                <Link to="#">
-                  <button onClick={()=>generatePDF()} className="btn btn-outline-success w-100 my-3 d-block">
+                  <button onClick={()=>handleUSer()} className="btn btn-outline-success w-100 my-3 d-block">
                     Sifarisi tamamla
                   </button>
-                </Link>
                 <button
                   onClick={() => dispatch(ClearAll())}
                   className="btn btn-outline-danger"

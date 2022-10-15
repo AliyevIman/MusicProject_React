@@ -50,7 +50,6 @@ const Home = () => {
       <section id="artist">
         <div className="container ">
           {
-            musician?
           musician &&
             musician.map(
               (mus) =>
@@ -95,13 +94,15 @@ const Home = () => {
                     <div className="col-lg-6">
                       <div className="prz-thumb">
                         <div className="img-thumb">
-                          <img src="/image/BinaAlbum.jpg" alt="" />
+                          <img className="img-fluid" src={mus.photo} alt="" />
                         </div>
                       </div>
                     </div>
                   </div>
                 )
-            ):   <SequenceSpinner size={30} color="#686769"  />  }
+            )
+                }
+            {/* //   <SequenceSpinner size={30} color="#686769"  />  } */}
         </div>
       </section>
 
@@ -145,7 +146,6 @@ const Home = () => {
                     <div className="gallery-col overlay2 ">
                       <img
                         alt="galllery-photo"
-                        
                         className="img-fluid"
                         src={cs.photo}
                       />

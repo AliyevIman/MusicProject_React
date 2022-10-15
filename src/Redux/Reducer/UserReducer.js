@@ -1,4 +1,4 @@
-import { USER_LOGIN_ERROR, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_ERROR, USER_REGISTER_SUCCESS } from "../Constants/UserConstants";
+import { USER_BEARTIST_ERROR, USER_BEARTIST_SUCCESS, USER_LOGIN_ERROR, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_ERROR, USER_REGISTER_SUCCESS } from "../Constants/UserConstants";
 
 export const RegisterReducer=(state={},action)=>{
 
@@ -25,4 +25,20 @@ export const LoginReducer=(state={},action)=>{
         default:
            return state;   
     }
+}
+
+
+export const BeArtistReducer=(state={},action)=>{
+
+    switch (action.type) {
+        case USER_BEARTIST_SUCCESS:
+            return {roleInfo:action.payload} 
+            case USER_BEARTIST_ERROR:
+                return {roleInfo:action.paload}
+        default:
+            return state;
+            
+    }
+    console.log(action.payload);
+
 }
