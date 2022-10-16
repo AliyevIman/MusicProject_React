@@ -19,7 +19,7 @@ const userInfoFromLS=localStorage.getItem("userInfo") ?
 const cartItemsFromLocal = localStorage.getItem("cartitems" )?
 JSON.parse(localStorage.getItem("cartitems")):[] 
 
-const roleInfoFromLS=localStorage.getItem("roleInfo")?
+ const roleInfoFromLS=localStorage.getItem("roleInfo") ?
  JSON.parse(localStorage.getItem("roleInfo"))
  :null
 

@@ -39,6 +39,4 @@ export const BeArtistReducer=(state={},action)=>{
             return state;
             
     }
-    console.log(action.payload);
-
 }

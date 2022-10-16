@@ -51,17 +51,17 @@ export const logoutAction=()=>(dispatch)=>{
 export const BeArtistAction =(email,roleName)=>async(dispatch)=>{
     try {
         const {data}=await axios.post(`${BASE_URL}api/Account/AddUserToRole?email=${email}&roleName=${roleName}`,).then(function (reponse){
-            console.log(reponse);
+            dispatch({
+                type:USER_BEARTIST_SUCCESS,
+                payload:reponse.data,
+           }) 
+       localStorage.setItem("roleInfo",JSON.stringify(reponse.data))    
+
         }).catch(function(error){
             console.log(error);
         });
-        dispatch({
-            type:USER_BEARTIST_SUCCESS,
-            payload:data,
-       })      
-       console.log(data);
+           
 
-       localStorage.setItem("roleInfo",JSON.stringify(data))    
  
    } 
    catch (error) {

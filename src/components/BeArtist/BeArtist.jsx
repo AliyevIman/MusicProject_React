@@ -13,14 +13,12 @@ const BeArtist = () => {
   const dispatch = useDispatch();
   const navi = useNavigate()
 
-  const  {myRoleInfo}= useSelector(st => st.role)
-  const { userInfo } = useSelector(st => st.loginUser);
-  console.log(myRoleInfo.roleInfo);
+  const  myRoleInfo= useSelector(st => console.log(st.role.roleinfo))
+  const {userInfo } = useSelector(st => st.loginUser);
   const submitForm = (e) => {
     e.preventDefault();
     dispatch(BeArtistAction(email, roleName));
   };
-
   useEffect(() => {
     if (myRoleInfo.roleInfo && myRoleInfo.roleInfo.status === 200) {
       navi("/")
