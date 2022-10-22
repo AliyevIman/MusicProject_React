@@ -1,9 +1,10 @@
 import { type } from '@testing-library/user-event/dist/type';
+import jwtDecode from 'jwt-decode';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import "../../pages/albums/Album.scss"
-import { BeArtistAction } from '../../Redux/Actions/UserAction';
+import { BeArtistAction, EditUserAction } from '../../Redux/Actions/UserAction';
 const BeArtist = () => {
   const [email, setEmail] = useState("");
   const [roleName, setRole] = useState("");
@@ -12,20 +13,22 @@ const BeArtist = () => {
   console.log(email);
   const dispatch = useDispatch();
   const navi = useNavigate()
+  const { userInfo } = useSelector(st => st.loginUser);
+  const myRole = useSelector(st => st.role);
+  console.log(myRole);
+  var decode = jwtDecode(userInfo.token.result.token);
+  const editUser = () => {
+    dispatch(EditUserAction(myRole.token.result.token))
+  }
 
-  const  myRoleInfo= useSelector(st => console.log(st.role.roleinfo))
-  const {userInfo } = useSelector(st => st.loginUser);
   const submitForm = (e) => {
     e.preventDefault();
+
     dispatch(BeArtistAction(email, roleName));
-  };
+  }
   useEffect(() => {
-    if (myRoleInfo.roleInfo && myRoleInfo.roleInfo.status === 200) {
-      navi("/")
-    }
-  }, [myRoleInfo.roleInfo, navi])
-
-
+    editUser();
+  }, [])
   return (
     <>
       <section id="pager-section">

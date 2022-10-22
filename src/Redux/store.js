@@ -11,7 +11,6 @@ const reducer   =combineReducers({
     register:RegisterReducer,
     loginUser :LoginReducer,
     role:BeArtistReducer
-    
 })
 const userInfoFromLS=localStorage.getItem("userInfo") ?
  JSON.parse(localStorage.getItem("userInfo"))
@@ -19,9 +18,9 @@ const userInfoFromLS=localStorage.getItem("userInfo") ?
 const cartItemsFromLocal = localStorage.getItem("cartitems" )?
 JSON.parse(localStorage.getItem("cartitems")):[] 
 
- const roleInfoFromLS=localStorage.getItem("roleInfo") ?
- JSON.parse(localStorage.getItem("roleInfo"))
- :null
+//  const roleInfoFromLS=localStorage.getItem("roleInfo") ?
+//  JSON.parse(localStorage.getItem("roleInfo"))
+//  :null
 
 
 const albumItemsFromLocal = localStorage.getItem("albumitems" )?
@@ -36,10 +35,10 @@ const initialState={
     },
     cart:{
         cartitems:cartItemsFromLocal
-    },
-    role:{
-        roleInfo:roleInfoFromLS
     }
+    // role:{
+    //     roleInfo:roleInfoFromLS
+    // }
 }
 const middleware = [thunk];
 const store=createStore(
