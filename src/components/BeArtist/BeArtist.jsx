@@ -2,33 +2,37 @@ import { type } from '@testing-library/user-event/dist/type';
 import jwtDecode from 'jwt-decode';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../../pages/albums/Album.scss"
 import { BeArtistAction, EditUserAction } from '../../Redux/Actions/UserAction';
+import AddMusic from './AddMusic';
 const BeArtist = () => {
   const [email, setEmail] = useState("");
   const [roleName, setRole] = useState("");
 
-  console.log(roleName);
-  console.log(email);
   const dispatch = useDispatch();
   const navi = useNavigate()
   const { userInfo } = useSelector(st => st.loginUser);
-  const myRole = useSelector(st => st.role);
-  console.log(myRole);
-  var decode = jwtDecode(userInfo.token.result.token);
-  const editUser = () => {
-    dispatch(EditUserAction(myRole.token.result.token))
+
+  // useEffect(() => {
+  //   if (decode.role[1] === 'Artist') {
+  //     navi("/");
+  //   }
+  // }, [userInfo, navi]);
+  // console.log(roleName);
+  // console.log(email);
+  if (userInfo) {
+    var decode = jwtDecode(userInfo.token.result.token);
   }
 
+  console.log(decode);
   const submitForm = (e) => {
     e.preventDefault();
-
-    dispatch(BeArtistAction(email, roleName));
+    if (userInfo) {
+      dispatch(BeArtistAction(email, roleName));
+    }
   }
-  useEffect(() => {
-    editUser();
-  }, [])
+
   return (
     <>
       <section id="pager-section">
@@ -39,38 +43,42 @@ const BeArtist = () => {
           </div>
         </div>
       </section>
+      {
+        userInfo && decode.role[1] === "Artist" ? (
+          <AddMusic/>
+        ) : (
+          <section>
+            {
+              userInfo?(
+                <form method='post' onSubmit={submitForm}>
+                <div className="form-outline mb-4">
+                  <label className="form-label" for="form2Example1">
+                    hey
+                  </label>
 
-      <section>
-        <form method='post' onSubmit={submitForm}>
-          <div className="form-outline mb-4">
-            <label className="form-label" for="form2Example1">
-              hey
-            </label>
-
-            <input
-              onChange={() => setEmail(userInfo.email)}
-              type="checkbox"
-              id="form2Example2"
-            />
-          </div>
-
-          <div className="form-outline mb-4">
-            <lable className="form-label" for="form2Example2" >Do You wanna be a Artist</lable>
-            <input
-              onChange={() => setRole("Artist")}
-              type="checkbox"
-              id="form2Example2"
-            />
-          </div>
-
-
-          <button type="submit" className="btn btn-primary btn-block mb-4" > Get Sarted</button>
-
-        </form>
-      </section>
+                  <input
+                    onChange={() => setEmail(userInfo.email)}
+                    type="checkbox"
+                    id="form2Example2"
+                  />
+                </div>
+                <div className="form-outline mb-4">
+                  <lable className="form-label" for="form2Example2" >Do You wanna be a Artist</lable>
+                  <input
+                    onChange={() => setRole("Artist")}
+                    type="checkbox"
+                    id="form2Example2"
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block mb-4" > Get Sarted</button>
+              </form>
+              ):<Link to="/login">Login</Link>
+           
+            }
+          </section>
+        )
+      }
     </>
-
   )
 }
-
 export default BeArtist

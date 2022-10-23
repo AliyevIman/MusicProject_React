@@ -1,4 +1,4 @@
-import { ALBUM_GETALL } from "../Constants/AlbumConstants";
+import { ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS } from "../Constants/AlbumConstants";
 
 export const AlbumReducer  = (state={albumitems:[]},action)=>{
 
@@ -21,4 +21,18 @@ export const AlbumReducer  = (state={albumitems:[]},action)=>{
                 default:
                 return state;
             }
+}
+
+
+export const albumListReducers=(state={albums:[]},action)=>{
+    switch (action.type) {
+        case ALBUM_LIST_REQUEST:
+            return {...state,loading:true}
+        case ALBUM_LIST_SUCCESS:
+            return {loading:false,albums:action.payload}
+            case ALBUM_LIST_FAIL:
+                return {loading:false,error:action.payload}
+        default:
+            return state;
+    }
 }

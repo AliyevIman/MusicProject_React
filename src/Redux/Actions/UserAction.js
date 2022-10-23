@@ -62,17 +62,12 @@ export const EditUserAction = (key) => async (dispatch) => {
 
 export const BeArtistAction = (email, roleName) => async (dispatch) => {
     try {
-        const { data } = await axios.post(`${BASE_URL}api/Account/AddUserToRole?email=${email}&roleName=${roleName}`,).then(function (reponse) {
-            console.log(reponse.data);
-            dispatch({
-                type: USER_BEARTIST_SUCCESS,
-                payload: reponse.data,
-            })
-        }).catch(function (error) {
-            console.log(error.message);
-        });
-
-
+        const { data } = await axios.post(`${BASE_URL}api/Account/AddUserToRole?email=${email}&roleName=${roleName}`,)
+        dispatch({
+            type: USER_BEARTIST_SUCCESS,
+            payload: data,
+        })
+        localStorage.setItem("userInfo",JSON.stringify(data))
     }
     catch (error) {
         dispatch({

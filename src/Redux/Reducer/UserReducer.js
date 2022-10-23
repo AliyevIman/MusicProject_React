@@ -35,11 +35,10 @@ export const BeArtistReducer=(state={},action)=>{
 
     switch (action.type) {
         case USER_BEARTIST_SUCCESS:
-            return {state:action.payload} 
+            return {  userInfo:action.payload} 
             case USER_BEARTIST_ERROR:
-                return {state:action.paload}
+                return {error:action.paload}
         default:
             return state;
-            
     }
 }

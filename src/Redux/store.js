@@ -2,15 +2,25 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import { Cartreducer } from "./Reducer/CartReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { AlbumReducer } from "./Reducer/AlbumReducer";
+import { albumListReducers, AlbumReducer } from "./Reducer/AlbumReducer";
 import { BeArtistReducer, LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
+import { muisicDeleteReducers, muisicEditReducers, muisicListReducers, muisicReducers, musicUpdateReducer } from "./Reducer/MusicReducer";
 
 const reducer   =combineReducers({
     cart:Cartreducer,
     album:AlbumReducer,
     register:RegisterReducer,
     loginUser :LoginReducer,
-    role:BeArtistReducer
+    role:BeArtistReducer,
+    //music
+    addedMusicRed:muisicReducers,
+    muiscList:muisicListReducers,
+    muiscDeleted:muisicDeleteReducers,
+    muiscEdit:muisicEditReducers,
+    muiscUpdate:musicUpdateReducer,
+    //album
+    albumList:albumListReducers,
+
 })
 const userInfoFromLS=localStorage.getItem("userInfo") ?
  JSON.parse(localStorage.getItem("userInfo"))
