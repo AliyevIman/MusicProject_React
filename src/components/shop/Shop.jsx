@@ -62,7 +62,7 @@ const Shop = () => {
 
     }
 
-
+dispatch(ClearAll());
 
 
 

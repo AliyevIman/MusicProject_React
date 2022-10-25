@@ -1,81 +1,85 @@
 import jwtDecode from 'jwt-decode';
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { useDispatch,useSelector } from 'react-redux';
 import { listAlbum } from '../../Redux/Actions/AlbumAction';
-import { musicAdd } from '../../Redux/Actions/MusicAction';
-import { MUSIC_CLEAR } from '../../Redux/Constants/MusicConstans';
+import { liveAdd } from '../../Redux/Actions/LiveShowAction';
+import { Link, useNavigate } from 'react-router-dom';
+import { LIVESHOW_CLEAR } from '../../Redux/Constants/LiveShowConstants';
 import Loading from '../LoadingError/Loading';
 import Toast from '../LoadingError/Toast';
-const AddMusic = () => {
+import { useState } from 'react';
+const AddLiveShow = () => {
     const dispatch = useDispatch();
-    const [Name, setName] = useState("")
-    const [musicUrl, setMusicUrl] = useState("")
-    const [musicVideo, setMusicVideo] = useState("")
-    const [author, setAuthor] = useState("")
-    const [isFeatured, setIsFeatured] = useState(false)
+    const [name, setName] = useState("")
     const [photo, setPhoto] = useState("")
-    const [albumId, setAlbumId] = useState(null)
-    const [userIdfirst, setUserId] = useState("")
-    
-    console.log(parseInt(albumId));
+    const [description, setDescription] = useState("")
+    const [loacation, setLocation] = useState("")
+    const [stock, setStock] = useState("")
+    const [price, setPrice] = useState("")
+    const [discount, setDiscount] = useState("")
+    const [ticketCount, setTicketCount] = useState("")
     const { albums } = useSelector(state => state.albumList);
-  const { userInfo } = useSelector(st => st.loginUser);
+    const { userInfo } = useSelector(st => st.loginUser);
+    const { liveInfo, loading } = useSelector(state => state.addedLiveRed)
 
-    // console.log(albums.map(c=>c.id));
-// console.log(parseInt(albumId));
-
-    const { musicInfo, loading } = useSelector(state => state.addedMusicRed)
     if (userInfo) {
         var decode = jwtDecode(userInfo.token.result.token);
-      }
-      console.log(decode.Id);
+    }
+    console.log(decode.Id);
     const navi = useNavigate();
     useEffect(() => {
-        if (musicInfo && musicInfo.status === 200) {
+        if (liveInfo && liveInfo.status === 200) {
             navi("/");
-            dispatch({ type: MUSIC_CLEAR })
+            dispatch({ type: LIVESHOW_CLEAR })
         }
-    }, [musicInfo, navi, dispatch])
+    }, [liveInfo, navi, dispatch])
+
     useEffect(() => {
         dispatch(listAlbum())
         // dispatch(listInstructors())
     }, [dispatch])
+
+
     const submitHandler = (e) => {
         e.preventDefault();
         // const musicians=musicians.userId
-        const newMusic = {
-            Name,
-            musicUrl,
-            musicVideo, 
-            authorName: author,
-            isFeatured,
+        const newLive = {
+            name,
+            description,
+            loacation,
+            stock,
+            price,
+            discount,
+            ticketCount,
             photo,
-            musicians:[
+            musicians: [
+                
                 {
-                    userId:decode.Id
+                    userId: decode.Id
                 }
             ],
-            albumsId: parseInt(albumId),
+            // albumsId: parseInt(albumId),
         }
-        dispatch(musicAdd(newMusic))
+        dispatch(liveAdd(newLive))
     }
-    
     return (
         <>
+          <section id="pager-section">
+        <div className="album-bg"></div>
+        <div className="container">
+          <div className="pager-content text-center">
+            <h2 >Discography</h2>
+          </div>
+        </div>
+      </section>
             <Toast />
             <section className="content-main" style={{ maxWidth: "1200px" }}>
                 <form onSubmit={submitHandler}>
                     <div className="content-header">
                         <Link to="/" className="btn btn-danger text-white">
-                            Go to Musics
+                            Go to Live
                         </Link>
-                        <Link to="/addlive" className="btn btn-danger text-white">
-                            Add Live SHow 
-                        </Link>
-                        <h2 className="content-title">Add music</h2>
+                        <h2 className="content-title">Add Live Show</h2>
                         <div>
                             <button type="submit" className="btn btn-primary">
                                 Publish now
@@ -91,7 +95,7 @@ const AddMusic = () => {
                                     {loading && <Loading />}
                                     <div className="mb-4">
                                         <label htmlFor="product_title" className="form-label">
-                                            Music Name
+                                            Live Show Name
                                         </label>
                                         <input
                                             type="text"
@@ -99,60 +103,45 @@ const AddMusic = () => {
                                             className="form-control"
                                             id="product_title"
                                             required
-                                            value={Name}
+                                            value={name}
                                             onChange={e => setName(e.target.value)}
                                         />
                                     </div>
 
                                     {/* <div className="mb-4">
-                                        <label htmlFor="product_title" className="form-label">
-                                            Musician :{userInfo.email}
-                                        </label>
-                                        <input
-                                            type="checkBox"
-                                            // placeholder=
-                                            // className="form-control"
-                                            id="product_title"
-                                            // required
-                                            value={userIdfirst}
-                                            onChange={() => setUserId(decode.Id)}
-                                        />
-                                    </div> */}
-
-                                    <div className="mb-4">
-                                        <label htmlFor="product_categories" className="form-label">
-                                            Albums
-                                        </label>
-                                        <select id="product_categories"
-                                            onChange={e => setAlbumId(e.target.value)}
-                                            className="form-control" defaultValue="-">
-                                            <option option disabled value="-">select albums...</option>
-                                            {albums?.map(album => (
-                                                console.log(album.id),
-                                                <option key={album.id} value={album.id}>{album.name}</option>
-                                            ))}
-                                        </select>
-                                    </div>
+                                <label htmlFor="product_title" className="form-label">
+                                    Musician :{userInfo.email}
+                                </label>
+                                <input
+                                    type="checkBox"
+                                    // placeholder=
+                                    // className="form-control"
+                                    id="product_title"
+                                    // required
+                                    value={userIdfirst}
+                                    onChange={() => setUserId(decode.Id)}
+                                />
+                            </div> */}
                                     <div className="mb-4">
 
                                         <label htmlFor="product_trailer" className="form-label">
-                                            musicUrl
+                                            Location
                                         </label>
 
                                         <input
-                                            type="file"
+                                            type="text"
                                             placeholder="Type here"
                                             className="form-control"
                                             id="product_trailer"
                                             required
-                                            value={musicUrl}
-                                            onChange={e => setMusicUrl(e.target.value)}
+                                            value={loacation}
+                                            onChange={e => setLocation(e.target.value)}
                                         />
 
                                     </div>
                                     <div className="mb-4">
                                         <label htmlFor="product_summary" className="form-label">
-                                            musicVideo
+                                        Description
                                         </label>
                                         <textarea
                                             type="text"
@@ -160,33 +149,61 @@ const AddMusic = () => {
                                             placeholder="Type here"
                                             className="form-control"
                                             id="product_summary"
-                                            value={musicVideo}
-                                            onChange={e => setMusicVideo(e.target.value)}
+                                            value={description}
+                                            onChange={e => setDescription(e.target.value)}
                                         />
                                     </div>
 
                                     <div className="mb-4">
                                         <label htmlFor="product_discount" className="form-label">
-                                            Author
+                                            Stock
                                         </label>
                                         <input
                                             type="text"
                                             placeholder="Type here"
                                             className="form-control"
                                             id="product_discount"
-                                            value={author}
-                                            onChange={(e) => setAuthor(e.target.value)}
+                                            value={stock}
+                                            onChange={(e) => setStock(e.target.value)}
                                         />
                                     </div>
                                     <div className="mb-4">
                                         <label htmlFor="product_featured" className="form-label">
-                                            Is Featured?
+                                         Price
                                         </label>
                                         <input
-                                            type="checkbox"
+                                            type="text"
+                                            placeholder="Type here"
+                                            className="form-control"
                                             id="product_price"
-                                            value={isFeatured}
-                                            onChange={(e) => { setIsFeatured(e.target.checked ? true : false) }}
+                                            value={price}
+                                            onChange={(e) => { setPrice(e.target.value) }}
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="product_featured" className="form-label">
+                                         Discount
+                                        </label>
+                                        <input
+                                            type="text"
+                                            placeholder="Type here"
+                                            className="form-control"
+                                            id="product_price"
+                                            value={discount}
+                                            onChange={(e) => { setDiscount(e.target.value) }}
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="product_featured" className="form-label">
+                                         Ticket Count
+                                        </label>
+                                        <input
+                                            type="text"
+                                            placeholder="Type here"
+                                            className="form-control"
+                                            id="product_price"
+                                            value={ticketCount}
+                                            onChange={(e) => { setTicketCount(e.target.value) }}
                                         />
                                     </div>
 
@@ -210,4 +227,4 @@ const AddMusic = () => {
     )
 }
 
-export default AddMusic
+export default AddLiveShow

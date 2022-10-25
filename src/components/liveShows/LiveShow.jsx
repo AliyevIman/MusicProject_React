@@ -60,7 +60,7 @@ const LiveShow = () => {
                       </div>
                       <div className="show-thumb">
                         <img
-                          src={c.musicians.map((s) => s.musicians.photo)}
+                          src={c.photo}
                           alt=""
                         />
                       </div>

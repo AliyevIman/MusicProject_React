@@ -44,7 +44,7 @@ const BeArtist = () => {
         </div>
       </section>
       {
-        userInfo && decode.role[1] === "Artist" ? (
+        userInfo && decode.role[0] === "Artist" ? (
           <AddMusic/>
         ) : (
           <section>

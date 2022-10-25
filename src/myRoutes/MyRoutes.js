@@ -7,6 +7,7 @@ import Register from '../pages/Register'
 import Login from '../pages/Login'
 import LiveShowPage from '../pages/LiveShowPage'
 import BeArtist from '../components/BeArtist/BeArtist'
+import AddLiveShow from '../components/liveShows/AddLiveShow'
 
 const MyRoutes = () => {
   return (
@@ -18,6 +19,8 @@ const MyRoutes = () => {
     <Route path="/login" element={<Login/>}/>
     <Route path="/liveshow" element={<LiveShowPage/>}/>
     <Route path="/artist" element={<BeArtist/>}/>
+    <Route path="/addlive" element={<AddLiveShow/>}/>
+
 
 
     {/* <Route path="/course-details/:id" element={<CourseDetail/>}/>

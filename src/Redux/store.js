@@ -5,6 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { albumListReducers, AlbumReducer } from "./Reducer/AlbumReducer";
 import { BeArtistReducer, LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
 import { muisicDeleteReducers, muisicEditReducers, muisicListReducers, muisicReducers, musicUpdateReducer } from "./Reducer/MusicReducer";
+import { liveDeleteReducers, liveEditReducers, liveListReducers, liveReducers, liveUpdateReducer } from "./Reducer/LiveShowReducer";
 
 const reducer   =combineReducers({
     cart:Cartreducer,
@@ -20,6 +21,14 @@ const reducer   =combineReducers({
     muiscUpdate:musicUpdateReducer,
     //album
     albumList:albumListReducers,
+    //liveShow
+    addedLiveRed:liveReducers,
+    liveList:liveListReducers,
+    liveDeleted:liveDeleteReducers,
+    liveEdit:liveEditReducers,
+    liveUpdate:liveUpdateReducer,
+    //liveShow
+
 
 })
 const userInfoFromLS=localStorage.getItem("userInfo") ?

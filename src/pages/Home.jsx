@@ -20,7 +20,7 @@ const Home = () => {
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(false);
   const getMusician = () => {
-    fetch(`${BASE_URL}api/Musician/GetAllMusician`)
+    fetch(`${BASE_URL}api/Musician/GetAll`)
       .then((c) => c.json())
       .then((s) => setMusician(s));
   };

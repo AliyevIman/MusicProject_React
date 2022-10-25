@@ -16,7 +16,7 @@ const AlbumDiscover = () => {
     const {musicUrl,name}= obj.music[0];
     // const {musicUrl} = obj.music.musicUrl[0];
     // const {name} =obj.music.name[0];
-    const nameMusician = obj.musician.name;
+    const nameMusician = obj.name;
     const cover = obj.albumPhoto;
 
     const objSingle = 
@@ -78,7 +78,7 @@ const AlbumDiscover = () => {
                     <h3>
                       <p onClick={() => submitform(c)}>{c.name}</p>
                     </h3>
-                    <span>{c.musician.name}</span>
+                    <span>{c.name}</span>
                   </div>
                 </div>
               </div>
