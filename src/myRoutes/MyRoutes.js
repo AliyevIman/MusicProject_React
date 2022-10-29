@@ -8,6 +8,9 @@ import Login from '../pages/Login'
 import LiveShowPage from '../pages/LiveShowPage'
 import BeArtist from '../components/BeArtist/BeArtist'
 import AddLiveShow from '../components/liveShows/AddLiveShow'
+import UserMusics from '../pages/UserAccountAPges/UserMusics'
+import AddAlbum from '../components/Album/AddAlbum'
+import MusicianAlbums from '../pages/UserAccountAPges/MusicianAlbums'
 
 const MyRoutes = () => {
   return (
@@ -20,6 +23,12 @@ const MyRoutes = () => {
     <Route path="/liveshow" element={<LiveShowPage/>}/>
     <Route path="/artist" element={<BeArtist/>}/>
     <Route path="/addlive" element={<AddLiveShow/>}/>
+    <Route path="/addalbum" element={<AddAlbum/>}/>
+
+    <Route path="/usermusics/:id" element={<UserMusics/>}/>
+    <Route path="/useralbum/:id" element={<MusicianAlbums/>}/>
+
+
 
 
 

@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import { Cartreducer } from "./Reducer/CartReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { albumListReducers, AlbumReducer } from "./Reducer/AlbumReducer";
+import { albumListReducers, AlbumReducer, albumReducers } from "./Reducer/AlbumReducer";
 import { BeArtistReducer, LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
 import { muisicDeleteReducers, muisicEditReducers, muisicListReducers, muisicReducers, musicUpdateReducer } from "./Reducer/MusicReducer";
 import { liveDeleteReducers, liveEditReducers, liveListReducers, liveReducers, liveUpdateReducer } from "./Reducer/LiveShowReducer";
@@ -21,6 +21,8 @@ const reducer   =combineReducers({
     muiscUpdate:musicUpdateReducer,
     //album
     albumList:albumListReducers,
+    addedAlbumRed:albumReducers,
+
     //liveShow
     addedLiveRed:liveReducers,
     liveList:liveListReducers,

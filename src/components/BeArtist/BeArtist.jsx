@@ -39,7 +39,7 @@ const BeArtist = () => {
         <div className="album-bg"></div>
         <div className="container">
           <div className="pager-content text-center">
-            <h2  >Discography</h2>
+            <h2 >Artist</h2>
           </div>
         </div>
       </section>

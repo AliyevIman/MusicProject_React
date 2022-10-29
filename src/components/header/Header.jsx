@@ -11,12 +11,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../Redux/Actions/UserAction";
 import CloseIcon from '@mui/icons-material/Close';
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import jwtDecode from "jwt-decode";
 const Header = () => {
   const [show, setShow] = useState(false)
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const myUser = useSelector((state) => state.loginUser);
+  const { userInfo } = useSelector(st => st.loginUser);
 
+    if (userInfo) {
+        var decode = jwtDecode(userInfo.token.result.token);
+      }
+    
   return (
     <div className="Header">
       <div className="container-fluid">
@@ -45,7 +51,7 @@ const Header = () => {
               {
                myUser && myUser.userInfo && myUser.userInfo.token &&
                 <li>
-                  <Link to="/artist">BeArtist</Link>
+                  <Link to="/artist">Artist</Link>
                 </li>
               }
 
@@ -87,17 +93,27 @@ const Header = () => {
               <PersonOutlineIcon /> <span>Account</span>
             </div>
             <ul className="list-unstyled account-ul">
-              {myUser && myUser.userInfo && myUser.userInfo.token ? (
+              {myUser && myUser.userInfo && myUser.userInfo.token ? ( 
                 <li className="email-box">
                   <Link className="user-email" to="#">
                     <span>{myUser.userInfo.email}</span>
                   </Link>
+                  
+                  <Link className="user-email" to={`/usermusics/${decode.Id}`}>
+                    <span>See Your Musics</span>
+                  </Link>
+                  <Link className="user-email" to={`/useralbum/${decode.Id}`}>
+                    <span>See Your Albums</span>
+                  </Link>
                   <button onClick={() => dispatch(logoutAction())}>
                     {" "}
+                    <Link to="/">
                     Logout{" "}
+
+                    </Link>
                   </button>
                 </li>
-              ) : (
+              ) : ( 
                 <>
                   {" "}
                   <li>

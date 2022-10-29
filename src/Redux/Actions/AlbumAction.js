@@ -3,6 +3,9 @@ import {
     BASE_URL
 } from "../../api/BaseConfig"
 import {
+    ALBUM_ADD_FAIL,
+    ALBUM_ADD_REQUEST,
+    ALBUM_ADD_SUCCESS,
     ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS
 } from "../Constants/AlbumConstants";
 
@@ -28,5 +31,22 @@ export const listAlbum=()=>async(dispatch)=>{
             
     } catch (error) {
         dispatch({type:ALBUM_LIST_FAIL,payload:error})
+    }
+}
+
+
+
+export const albumAdd=(albumData)=>async(dispatch)=>{
+    try {
+        dispatch({type:ALBUM_ADD_REQUEST});
+        const config={
+            headers:{
+                "Content-Type": "application/json",
+            }
+        }
+        const {data} = await axios.post(`${BASE_URL}api/ALbums/AddAlbum`,JSON.stringify(albumData),config)
+        dispatch({type:ALBUM_ADD_SUCCESS,payload:data});
+    } catch (error) {
+        dispatch({type:ALBUM_ADD_FAIL,payload:error});
     }
 }

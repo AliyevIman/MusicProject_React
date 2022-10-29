@@ -10,7 +10,7 @@ const AlbumDiscover = () => {
  
   const dispatch = useDispatch();
   const { albumitems } = useSelector((state) => state.cart);
-
+console.log(albumitems);
   const submitform = (obj) => {
     // e.preventDefault();
     const {musicUrl,name}= obj.music[0];

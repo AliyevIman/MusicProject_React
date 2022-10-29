@@ -35,7 +35,7 @@ const AddMusic = () => {
     const navi = useNavigate();
     useEffect(() => {
         if (musicInfo && musicInfo.status === 200) {
-            navi("/");
+            navi(`/usermusics/${decode.Id}`);
             dispatch({ type: MUSIC_CLEAR })
         }
     }, [musicInfo, navi, dispatch])
@@ -74,6 +74,9 @@ const AddMusic = () => {
                         </Link>
                         <Link to="/addlive" className="btn btn-danger text-white">
                             Add Live SHow 
+                        </Link>
+                         <Link to="/addalbum" className="btn btn-danger text-white">
+                            Add Album 
                         </Link>
                         <h2 className="content-title">Add music</h2>
                         <div>

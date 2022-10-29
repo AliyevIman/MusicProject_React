@@ -12,6 +12,8 @@ import AddIcon from '@mui/icons-material/Add';
 import FsLightbox from "fslightbox-react";
 import { Skeleton } from "@mui/material";
 import { PushSpinner, SequenceSpinner } from "react-spinners-kit";
+import Toast from "../components/LoadingError/Toast";
+import Loading from "../components/LoadingError/Loading";
 // import Iframe from "react-iframe-click";
 const Home = () => {
   const [musician, setMusician] = useState([]);
@@ -47,10 +49,12 @@ const Home = () => {
     <>
       <Mainslider />
       <LiveShow />
+      <Toast />
+
       <section id="artist">
         <div className="container ">
           {
-          musician &&
+            musician?
             musician.map(
               (mus) =>
                 mus.isNew && (
@@ -100,11 +104,11 @@ const Home = () => {
                     </div>
                   </div>
                 )
-            )
+            ):<Loading/>
                 }
-            {/* //   <SequenceSpinner size={30} color="#686769"  />  } */}
         </div>
       </section>
+            {/* //   <SequenceSpinner size={30} color="#686769"  />  } */}
 
       <section className="musicVideo">
         <div className="fixed-bg"></div>
@@ -131,7 +135,7 @@ const Home = () => {
                   <h3>New Music Video {c.name}</h3>
                 </div>
               )
-          ):<Skeleton animation="wave" variant="rectangular" width={210} height={118}/>  } 
+          ):<Skeleton animation="wave" variant="rectangular" width={210} height={558}/>  } 
         </div>
       </section>
 
