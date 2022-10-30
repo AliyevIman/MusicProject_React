@@ -1,4 +1,4 @@
-import { ALBUM_ADD_FAIL, ALBUM_ADD_REQUEST, ALBUM_ADD_SUCCESS, ALBUM_CLEAR, ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS } from "../Constants/AlbumConstants";
+import { ALBUMUSER_LIST_FAIL, ALBUMUSER_LIST_REQUEST, ALBUMUSER_LIST_SUCCESS, ALBUM_ADD_FAIL, ALBUM_ADD_REQUEST, ALBUM_ADD_SUCCESS, ALBUM_CLEAR, ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS } from "../Constants/AlbumConstants";
 
 export const AlbumReducer  = (state={albumitems:[]},action)=>{
 
@@ -49,6 +49,20 @@ export const albumReducers=(state={albumInfo:{}},action)=>{
                 return {loading:false,error:action.payload}
             case ALBUM_CLEAR:
                 return {}
+        default:
+            return state;
+    }
+}
+
+
+export const albumUserListReducers=(state={albumuser:[]},action)=>{
+    switch (action.type) {
+        case ALBUMUSER_LIST_REQUEST:
+            return {...state,loading:true}
+        case ALBUMUSER_LIST_SUCCESS:
+            return {loading:false,albumuser:action.payload}
+            case ALBUMUSER_LIST_FAIL:
+                return {loading:false,error:action.payload}
         default:
             return state;
     }

@@ -11,6 +11,7 @@ const UserMusics = () => {
 
     const [userMusic, setUserMusic] = useState([]);
     console.log(userMusic.musics);
+
     // console.log(userMusic.musics === undefined ? ("fuck") : userMusic.musics.map(c => c.music.photo));
     const getUserMusics = (myId) => {
         fetch(`${BASE_URL}api/Musician/GetMusicMusician/${myId}`)

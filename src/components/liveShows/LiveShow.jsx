@@ -61,7 +61,7 @@ const LiveShow = () => {
                       <div className="show-thumb">
                         <img
                           src={c.photo}
-                          alt=""
+                          alt="live show's Photo"
                         />
                       </div>
                       <div className="show-info">

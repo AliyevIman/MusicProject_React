@@ -12,9 +12,8 @@ const Http = () => {
         request
     }
 
-
+    
     function getMusicItems(obj) {
-
         const {
             musicUrl,
             name

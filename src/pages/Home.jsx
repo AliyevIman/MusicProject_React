@@ -41,7 +41,7 @@ const Home = () => {
     GetMusic();
     getMusicMusician();
   }, []);
-  // console.log(show);
+  console.log(show);
   //   musicMusician.map((el) => {
   //   el.musics.map((fel) => console.log( fel.music))
   // });

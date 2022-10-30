@@ -3,6 +3,9 @@ import {
     BASE_URL
 } from "../../api/BaseConfig"
 import {
+    ALBUMUSER_LIST_FAIL,
+    ALBUMUSER_LIST_REQUEST,
+    ALBUMUSER_LIST_SUCCESS,
     ALBUM_ADD_FAIL,
     ALBUM_ADD_REQUEST,
     ALBUM_ADD_SUCCESS,
@@ -48,5 +51,20 @@ export const albumAdd=(albumData)=>async(dispatch)=>{
         dispatch({type:ALBUM_ADD_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:ALBUM_ADD_FAIL,payload:error});
+    }
+}
+
+
+
+
+export const listAlbumUser=(userId,albumId)=>async(dispatch)=>{
+    try {
+        dispatch({type:ALBUMUSER_LIST_REQUEST})
+        const {data} = await axios.get(`${BASE_URL}api/Albums/GetAlbumMusic/${userId}/${albumId}`)
+
+        dispatch({type:ALBUMUSER_LIST_SUCCESS,payload:data})
+            
+    } catch (error) {
+        dispatch({type:ALBUMUSER_LIST_FAIL,payload:error})
     }
 }
