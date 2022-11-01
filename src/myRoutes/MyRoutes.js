@@ -11,7 +11,8 @@ import AddLiveShow from '../components/liveShows/AddLiveShow'
 import UserMusics from '../pages/UserAccountAPges/UserMusics'
 import AddAlbum from '../components/Album/AddAlbum'
 import MusicianAlbums from '../pages/UserAccountAPges/MusicianAlbums'
-import AlbumDetail from '../components/Album/AlbumDetail'
+import MusicianAlbumDetail from '../components/Album/MusicianAlbumDetail'
+import AlbumDetail from '../pages/AlbumDetail'
 
 const MyRoutes = () => {
   return (
@@ -28,7 +29,9 @@ const MyRoutes = () => {
 
     <Route path="/usermusics/:id" element={<UserMusics/>}/>
     <Route path="/useralbum/:id" element={<MusicianAlbums/>}/>
-    <Route path="/albumdetail/:userId/:id" element={<AlbumDetail/>}/>
+    <Route path="/albumdetail/:userId/:id" element={<MusicianAlbumDetail/>}/>
+    <Route path="/albumdetail" element={<AlbumDetail/>}/>
+
 
     {/* <Route path="/course-details/:id" element={<CourseDetail/>}/>
     <Route path="/courses/:id" element={<Courses/>}/>

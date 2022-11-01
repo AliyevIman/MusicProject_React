@@ -10,11 +10,7 @@ export const registerAction = (firstName, lastName, email, password, confirmPass
                 "Content-Type": "application/json",
             }
         }
-        const { data } = await axios.post(`${BASE_URL}api/Account/register`, { firstName, lastName, email, password, confirmPassword },config).then(function (reponse) {
-            console.log(reponse);
-        }).catch(function (error) {
-            console.log(error);
-        });
+        const { data } = await axios.post(`${BASE_URL}api/Account/register`, { firstName, lastName, email, password, confirmPassword },config);
         dispatch({
             type: USER_REGISTER_SUCCESS,
             payload: data

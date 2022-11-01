@@ -9,10 +9,10 @@ import {
     ALBUM_ADD_FAIL,
     ALBUM_ADD_REQUEST,
     ALBUM_ADD_SUCCESS,
-    ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS
+    ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS, CLEAR_ALBUM, REMOVE_FROM_ALBUM
 } from "../Constants/AlbumConstants";
 
- export const AlbumAction = (objSingle) => (dispatch, getState) => {
+export const AlbumAction = (objSingle) => (dispatch, getState) => {
 
     // const {
     //     data
@@ -23,48 +23,66 @@ import {
         payload: objSingle
     })
     localStorage.setItem("albumitems", JSON.stringify(getState().album.albumitems))
-
+    // getState().album.albumitems
+}
+export const RemoveAlbum = (id) => (dispatch, getState) => {
+    dispatch({
+        type: REMOVE_FROM_ALBUM,
+        payload: id
+    })
+    localStorage.setItem("albumitems", JSON.stringify(getState().album.albumitems))
 }
 
-export const listAlbum=()=>async(dispatch)=>{
+export const ClearAll = () => (dispatch, getState) => {
+    dispatch({
+        type: CLEAR_ALBUM
+    })
+    localStorage.setItem("albumitems", JSON.stringify(getState().album.albumitems))
+}
+
+
+
+
+
+export const listAlbum = () => async (dispatch) => {
     try {
-        dispatch({type:ALBUM_LIST_REQUEST})
-        const {data} = await axios.get(`${BASE_URL}api/Albums/GetAll`)
-        dispatch({type:ALBUM_LIST_SUCCESS,payload:data})
-            
+        dispatch({ type: ALBUM_LIST_REQUEST })
+        const { data } = await axios.get(`${BASE_URL}api/Albums/GetAll`)
+        dispatch({ type: ALBUM_LIST_SUCCESS, payload: data })
+
     } catch (error) {
-        dispatch({type:ALBUM_LIST_FAIL,payload:error})
+        dispatch({ type: ALBUM_LIST_FAIL, payload: error })
     }
 }
 
 
 
-export const albumAdd=(albumData)=>async(dispatch)=>{
+export const albumAdd = (albumData) => async (dispatch) => {
     try {
-        dispatch({type:ALBUM_ADD_REQUEST});
-        const config={
-            headers:{
+        dispatch({ type: ALBUM_ADD_REQUEST });
+        const config = {
+            headers: {
                 "Content-Type": "application/json",
             }
         }
-        const {data} = await axios.post(`${BASE_URL}api/ALbums/AddAlbum`,JSON.stringify(albumData),config)
-        dispatch({type:ALBUM_ADD_SUCCESS,payload:data});
+        const { data } = await axios.post(`${BASE_URL}api/ALbums/AddAlbum`, JSON.stringify(albumData), config)
+        dispatch({ type: ALBUM_ADD_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({type:ALBUM_ADD_FAIL,payload:error});
+        dispatch({ type: ALBUM_ADD_FAIL, payload: error });
     }
 }
 
 
 
 
-export const listAlbumUser=(userId,albumId)=>async(dispatch)=>{
+export const listAlbumUser = (userId, albumId) => async (dispatch) => {
     try {
-        dispatch({type:ALBUMUSER_LIST_REQUEST})
-        const {data} = await axios.get(`${BASE_URL}api/Albums/GetAlbumMusic/${userId}/${albumId}`)
+        dispatch({ type: ALBUMUSER_LIST_REQUEST })
+        const { data } = await axios.get(`${BASE_URL}api/Albums/GetAlbumMusic/${userId}/${albumId}`)
 
-        dispatch({type:ALBUMUSER_LIST_SUCCESS,payload:data})
-            
+        dispatch({ type: ALBUMUSER_LIST_SUCCESS, payload: data })
+
     } catch (error) {
-        dispatch({type:ALBUMUSER_LIST_FAIL,payload:error})
+        dispatch({ type: ALBUMUSER_LIST_FAIL, payload: error })
     }
 }

@@ -9,6 +9,7 @@ import store from './Redux/store';
 import MusicPlayer from './components/MusicPlayer/MusicPlayer';
 
 function App() {
+  
   return (
 <>
   <BrowserRouter>

@@ -1,4 +1,4 @@
-import { ALBUMUSER_LIST_FAIL, ALBUMUSER_LIST_REQUEST, ALBUMUSER_LIST_SUCCESS, ALBUM_ADD_FAIL, ALBUM_ADD_REQUEST, ALBUM_ADD_SUCCESS, ALBUM_CLEAR, ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS } from "../Constants/AlbumConstants";
+import { ALBUMUSER_LIST_FAIL, ALBUMUSER_LIST_REQUEST, ALBUMUSER_LIST_SUCCESS, ALBUM_ADD_FAIL, ALBUM_ADD_REQUEST, ALBUM_ADD_SUCCESS, ALBUM_CLEAR, ALBUM_GETALL, ALBUM_LIST_FAIL, ALBUM_LIST_REQUEST, ALBUM_LIST_SUCCESS, CLEAR_ALBUM, REMOVE_FROM_ALBUM } from "../Constants/AlbumConstants";
 
 export const AlbumReducer  = (state={albumitems:[]},action)=>{
 
@@ -6,18 +6,24 @@ export const AlbumReducer  = (state={albumitems:[]},action)=>{
      switch (action.type) {
         case ALBUM_GETALL:
             const item =action.payload;
-            const exititem = state.albumitems.find(c=>c.id==item.id);     
-            if(exititem){
-                return{
-                ...state,
-                albumitems: state.albumitems.map((c)=>
-                c.id === exititem.id ? item:c
-                )
+            // const exititem = state.albumitems.find(c=>c.name==item.name);                 
+ 
+            // if (exititem) {
+                return {
+                    ...state,
+                    albumitems: item
+                    // state.albumitems.map((c) =>
+                    //   c.name === exititem.name ? item : c
+                    // )
                 }
-            }   
-            else{
-                return {...state,albumitems:[...state.albumitems,item]}
-            }
+            //   }
+            // else{
+                // return {...state,albumitems:[...state.albumitems,item]}
+            // }
+            case REMOVE_FROM_ALBUM:
+                return { ...state, albumitems: state.albumitems.filter(c => c.id !== action.payload) }
+              case CLEAR_ALBUM:
+                return { ...state, albumitems: state.albumitems = [] }
                 default:
                 return state;
             }

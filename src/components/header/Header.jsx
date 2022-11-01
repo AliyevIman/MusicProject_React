@@ -14,7 +14,10 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import jwtDecode from "jwt-decode";
 import { Box } from "@mui/system";
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
+
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+
 const Header = () => {
   const [show, setShow] = useState(false)
   const dispatch = useDispatch();
@@ -49,11 +52,6 @@ const Header = () => {
               </li>
               <li className="album">
                 <Link to="/albumdisc">Albums</Link>
-                <ul className="drop-menu list-unstyled">
-                  <li>
-                    <Link to="/albumdisc">Discography</Link>
-                  </li>
-                </ul>
               </li>
               <li>
                 <Link to="/liveshow">Live</Link>
@@ -78,130 +76,128 @@ const Header = () => {
                       : 0}
                   </div>
                 </Link>
-              </li>
-            </ul>
-          </nav>
-          {/* <div className="social">
-            <ul className="list-unstyled d-flex">
-              <li>
-                <FacebookIcon />
-              </li>
-              <li>
-                <TwitterIcon />
-              </li>
-              <li>
-                <InstagramIcon />
-              </li>
-              <li>
-                <YouTubeIcon />
-              </li>
-             
-            </ul>
-          </div> */}
-          <div className="personal">
-            <div className="personal-icon d-flex">
-              <PersonOutlineIcon /> <span>Account</span>
-            </div>
-            <ul className="list-unstyled account-ul">
-              {myUser && myUser.userInfo && myUser.userInfo.token ? ( 
-                <li className="email-box">
-                  <Link className="user-email" to="#">
-                    <span>{myUser.userInfo.email}</span>
-                  </Link>
+              </li>       {myUser && myUser.userInfo && myUser.userInfo.token ? ( 
+                // <li className="email-box">
+                //   <Link className="user-email" to="#">
+                //     <span>{myUser.userInfo.email}</span>
+                //   </Link>
                   
-                  <Link className="user-email" to={`/usermusics/${decode.Id}`}>
-                    <span>See Your Musics</span>
-                  </Link>
-                  <Link className="user-email" to={`/useralbum/${decode.Id}`}>
+                //   <Link className="user-email" to={`/usermusics/${decode.Id}`}>
+                //     <span>See Your Musics</span>
+                //   </Link>
+                //   <Link className="user-email" to={`/useralbum/${decode.Id}`}>
+                //     <span>See Your Albums</span>
+                //   </Link>
+                //   <button onClick={() => dispatch(logoutAction())}>
+                //     {" "}
+                //     <Link to="/">
+                //     Logout{" "}
+
+                //     </Link>
+                //   </button>
+                // </li>
+                <React.Fragment>
+                <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                  <Tooltip title="Account settings">
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                      aria-controls={open ? 'account-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                    >
+                      <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+                <Menu
+                  anchorEl={anchorEl}
+                  id="account-menu"
+                  open={open}
+                  onClose={handleClose}
+                  onClick={handleClose}
+                  PaperProps={{
+                    elevation: 0,
+                    sx: {
+                      overflow: 'visible',
+                      filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                      mt: 1.5,
+                      '& .MuiAvatar-root': {
+                        width: 32,
+                        height: 32,
+                        ml: -0.5,
+                        mr: 1,
+                      },
+                      '&:before': {
+                        content: '""',
+                        display: 'block',
+                        position: 'absolute',
+                        top: 0,
+                        right: 14,
+                        width: 10,
+                        height: 10,
+                        bgcolor: 'background.paper',
+                        transform: 'translateY(-50%) rotate(45deg)',
+                        zIndex: 0,
+                      },
+                    },
+                  }}
+                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                >
+                  <MenuItem>
+                    <Avatar /> Profile :{myUser.userInfo.email}
+                  </MenuItem>
+                  <MenuItem>
+                    <Avatar /> My account
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem>
+                    <ListItemIcon>
+                      <PersonAdd fontSize="small" />
+                    </ListItemIcon>
+                    <Link style={{textDecoration:"none",color:"#202020"}}  to={`/register`}>
+
+                    Add another account
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                    <SendIcon fontSize="small" />
+                    </ListItemIcon>
+                    <Link style={{textDecoration:"none",color:"#202020"}}  to={`/useralbum/${decode.Id}`}>
                     <span>See Your Albums</span>
                   </Link>
-                  <button onClick={() => dispatch(logoutAction())}>
-                    {" "}
-                    <Link to="/">
-                    Logout{" "}
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                    <SendIcon fontSize="small" />
+                    </ListItemIcon>
+                    <Link style={{textDecoration:"none",color:"#202020"}}  to={`/usermusics/${decode.Id}`}>
+                    <span>See Your Musics</span>
+                  </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <Settings fontSize="small" />
+                    </ListItemIcon>
+                    Settings
+                  </MenuItem>
+                  <MenuItem onClick={() => dispatch(logoutAction())}>
+                    <ListItemIcon >
+                      <Logout fontSize="small" />
+                    </ListItemIcon >
+              
+                 {" "}
+                     <a style={{textDecoration:"none",color:"#202020"}} >
+                  Sign Out{" "}
 
-                    </Link>
-                  </button>
-                </li>
-              //   <React.Fragment>
-              //   <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-              //     <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-              //     <Typography sx={{ minWidth: 100 }}>Profile</Typography>
-              //     <Tooltip title="Account settings">
-              //       <IconButton
-              //         onClick={handleClick}
-              //         size="small"
-              //         sx={{ ml: 2 }}
-              //         aria-controls={open ? 'account-menu' : undefined}
-              //         aria-haspopup="true"
-              //         aria-expanded={open ? 'true' : undefined}
-              //       >
-              //         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
-              //       </IconButton>
-              //     </Tooltip>
-              //   </Box>
-              //   <Menu
-              //     anchorEl={anchorEl}
-              //     id="account-menu"
-              //     open={open}
-              //     onClose={handleClose}
-              //     onClick={handleClose}
-              //     PaperProps={{
-              //       elevation: 0,
-              //       sx: {
-              //         overflow: 'visible',
-              //         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-              //         mt: 1.5,
-              //         '& .MuiAvatar-root': {
-              //           width: 32,
-              //           height: 32,
-              //           ml: -0.5,
-              //           mr: 1,
-              //         },
-              //         '&:before': {
-              //           content: '""',
-              //           display: 'block',
-              //           position: 'absolute',
-              //           top: 0,
-              //           right: 14,
-              //           width: 10,
-              //           height: 10,
-              //           bgcolor: 'background.paper',
-              //           transform: 'translateY(-50%) rotate(45deg)',
-              //           zIndex: 0,
-              //         },
-              //       },
-              //     }}
-              //     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-              //     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-              //   >
-              //     <MenuItem>
-              //       <Avatar /> Profile
-              //     </MenuItem>
-              //     <MenuItem>
-              //       <Avatar /> My account
-              //     </MenuItem>
-              //     <Divider />
-              //     <MenuItem>
-              //       <ListItemIcon>
-              //         <PersonAdd fontSize="small" />
-              //       </ListItemIcon>
-              //       Add another account
-              //     </MenuItem>
-              //     <MenuItem>
-              //       <ListItemIcon>
-              //         <Settings fontSize="small" />
-              //       </ListItemIcon>
-              //       Settings
-              //     </MenuItem>
-              //     <MenuItem>
-              //       <ListItemIcon>
-              //         <Logout fontSize="small" />
-              //       </ListItemIcon>
-              //       Logout
-              //     </MenuItem>
-              //   </Menu>
-              // </React.Fragment>
+                    </a>
+                    
+                  </MenuItem>
+                </Menu>
+              </React.Fragment>
               ) : ( 
                 <>
                   {" "}
@@ -214,7 +210,9 @@ const Header = () => {
                 </>
               )}
             </ul>
-          </div>
+          </nav>
+
+    
           <div className="menu-bar">
             <i onClick={() => setShow(!show)} >
               {
@@ -229,11 +227,15 @@ const Header = () => {
 
               show && (
                 <ul className={`list-unstyled ${show && `active`}`}>
-                  <li><a href="#">Album</a> </li>
-                  <li><a href="#">Album</a> </li>
-                  <li><a href="#">Album</a> </li>
-                  <li><a href="#">Album</a> </li>
-                  <li><a href="#">Album</a> </li>
+                  <li><Link to="/">Home</Link> </li>
+                  <li><Link to="/albumdisc">Albums</Link> </li>
+                  <li><Link to="/liveshow">Live Shows</Link> </li>
+                  {
+               myUser && myUser.userInfo && myUser.userInfo.token &&
+                <li>
+                  <Link to="/artist">Artist</Link>
+                </li>
+              }
                 </ul>
               )
             }

@@ -127,49 +127,21 @@
         }
 
         .personal {
-            position: relative;
-            padding: 0%;
-            color: #fff;
             margin-left: 15px;
 
-            .personal-icon {
-                cursor: pointer;
-            }
-
-            &:hover {
-                ul {
-                    opacity: 1;
-                    visibility: visible;
-                }
-            }
 
             .account-ul {
-                position: absolute;
-                // top: 100%;
-                left: -50%;
-                width: 150px;
-                border-radius: 5px;
-                background-color: #fff;
-                box-shadow: 0 20px 0 0;
-                color: #ffffff;
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.4s ease-in-out;
-                margin-top: 20px;
-
-                .email-box {
-                    .user-email {
-                        text-decoration: none;
-                        color: #f559a4;
-                    }
-                }
-
+            display: flex;
+margin-bottom:40px ;
                 li {
                     a {
                         text-decoration: none;
-                        color: #00b9c6;
+                        color: #fff;
                         margin: 10px;
                         display: block;
+                        &:hover{
+                            color: #00b9c6;
+                        }
                     }
                 }
             }

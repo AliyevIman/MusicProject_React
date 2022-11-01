@@ -9,29 +9,30 @@ import Http from "../../hooks/useHttp";
 import { useDispatch, useSelector } from "react-redux";
 
 const MusicPlayer = () => {
-  const { request } = Http();
-const {albumitems} = useSelector(state=>state.album)
-const dispatch = useDispatch();
+  // const { request } = Http();
+  const { albumitems } = useSelector(state => state.album)
+  const dispatch = useDispatch();
 
   const [Music, setMusic] = useState([]);
   const [list, setList] = useState([]);
-console.log(albumitems);
+  console.log(albumitems);
   useEffect(() => {
-    request(BASE_URL + "api/Musician/GetAll").then(setMusic);
+    fetch(BASE_URL + "api/Musician/GetAll").then(c => c.json()).then(setMusic);
   }, []);
 
   // useEffect(() => {
   //   console.log(Music);
   // }, [Music]);
 
-
   return (
     <>
       <ReactJkMusicPlayer
-        audioLists={albumitems?albumitems:Music}
+        // onDestroyed={true}
+        // albumitems?albumitems:
+        audioLists={albumitems}
         autoPlay={false}
-        // toggleMode={false}
-        // mode="full"
+      // toggleMode={false}
+      // mode="full"
       />
     </>
   );
