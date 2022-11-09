@@ -46,14 +46,15 @@ const MusicianAlbums = () => {
         getUserAlbum(id);
     }, [id])
     return (
-        <>     <section id="pager-section">
-            <div className="album-bg"></div>
-            <div className="container">
-                <div className="pager-content text-center">
-                    <h2>{userAlbum.firstname}'s Albums</h2>
+        <>
+            <section id="pager-section">
+                <div className="album-bg"></div>
+                <div className="container">
+                    <div className="pager-content text-center">
+                        <h2>{userAlbum.firstname}'s Albums</h2>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
             <section className="album-block">
                 <div className="fixed-bg"></div>

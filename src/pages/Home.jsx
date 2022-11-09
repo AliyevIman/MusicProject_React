@@ -14,7 +14,7 @@ import { Skeleton } from "@mui/material";
 import { PushSpinner, SequenceSpinner } from "react-spinners-kit";
 import Toast from "../components/LoadingError/Toast";
 import Loading from "../components/LoadingError/Loading";
-import ImageGallery from "./ImageGallery";
+import ImageGallery from "../components/Imagegallery/ImageGallery";
 // import Iframe from "react-iframe-click";
 const Home = () => {
   const [musician, setMusician] = useState([]);
@@ -42,13 +42,12 @@ const Home = () => {
     GetMusic();
     getMusicMusician();
   }, []);
-  console.log(show);
   //   musicMusician.map((el) => {
   //   el.musics.map((fel) => console.log( fel.music))
   // });
   return (
     <>
-      <Mainslider />
+      <Mainslider  />
       <LiveShow />
       <Toast />
 
@@ -99,7 +98,7 @@ const Home = () => {
                       <div className="col-lg-6">
                         <div className="prz-thumb">
                           <div className="img-thumb">
-                            <img className="img-fluid" src={mus.photo} alt="" />
+                            <img style={{width:"100%"}} className="img-fluid" src={mus.photo} alt="" />
                           </div>
                         </div>
                       </div>

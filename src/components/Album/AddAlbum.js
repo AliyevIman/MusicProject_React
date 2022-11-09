@@ -8,6 +8,10 @@ import { musicAdd } from '../../Redux/Actions/MusicAction';
 import { ALBUM_CLEAR } from '../../Redux/Constants/AlbumConstants';
 import Loading from '../LoadingError/Loading';
 import { albumAdd } from '../../Redux/Actions/AlbumAction';
+import { Button } from '@mui/material';
+import { BASE_URL, FILE_PATH } from '../../api/BaseConfig';
+import axios from 'axios';
+import { PhotoAction } from '../../Redux/Actions/FileUploadAction';
 
 const AddAlbum = () => {
     const dispatch = useDispatch();
@@ -17,36 +21,46 @@ const AddAlbum = () => {
     const [songCount, setSongCount] = useState("");
     const [isFeatured, setIsFeatured] = useState(false);
     const [isNew, setIsNew] = useState(false);
-
+    console.log(albumPhoto);
     const navi = useNavigate();
 
     const { userInfo } = useSelector(st => st.loginUser);
     const { albumInfo, loading } = useSelector(state => state.addedAlbumRed)
+    const photoInfo = useSelector(st => st.photoAdd);
 
     if (userInfo) {
         var decode = jwtDecode(userInfo.token.result.token);
     }
+
+    const fileUploadHandler = async (event) => {
+        dispatch(PhotoAction(event))
+
+    }
+
     useEffect(() => {
         if (albumInfo && albumInfo.status === 200) {
-            navi(`/`);
+            navi(`/useralbum/${decode.Id}`);
             dispatch({ type: ALBUM_CLEAR })
         }
-    }, [albumInfo, navi, dispatch])
+    }, [albumInfo, navi, dispatch, albumPhoto])
 
     const submitHandler = (e) => {
-        e.preventDefault();
-        // const musicians=musicians.userId
-        const newAlbum = {
-            name,
-            songCount,
-            recordLable,
-            isFeatured,
-            isNew,
-            albumPhoto,
-            userId: decode.Id
-            // albumsId: parseInt(albumId),
+        if (userInfo) {
+
+            e.preventDefault();
+            // const musicians=musicians.userId
+            const newAlbum = {
+                name,
+                songCount,
+                recordLable,
+                isFeatured,
+                isNew,
+                albumPhoto,
+                userId: decode.Id
+                // albumsId: parseInt(albumId),
+            }
+            dispatch(albumAdd(newAlbum))
         }
-        dispatch(albumAdd(newAlbum))
     }
     return (
         <>
@@ -59,14 +73,20 @@ const AddAlbum = () => {
                 </div>
             </section>
             <Toast />
+            {
+                userInfo?(
+
             <section className="content-main" style={{ maxWidth: "1200px" }}>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={submitHandler} encType="multipart/form-data" >
                     <div className="content-header">
                         <Link to="/addlive" className="btn btn-danger text-white">
                             Add Live SHow
                         </Link>
                         <Link to="/artist" className="btn btn-danger text-white">
                             Add Music
+                        </Link>
+                        <Link to={`/useralbum/${decode.Id}`} className="btn btn-danger text-white">
+                            Go to Albums
                         </Link>
                         <h2 className="content-title">Add Album</h2>
                         <div>
@@ -137,14 +157,30 @@ const AddAlbum = () => {
                                         />
                                     </div> */}
                                     <div className="mb-4">
-                                        <label className="form-label">Images</label>
-                                        <input
-                                            className="form-control"
-                                            type="file"
-                                            placeholder="Enter Image URL"
-                                            value={albumPhoto}
-                                            onChange={(e) => setAlbumPhoto(e.target.value)}
-                                        />
+                                        <Button
+                                            fullWidth
+                                            variant="contained"
+                                            component="label"
+                                        >
+                                            Upload File
+                                            <input
+                                                type="file"
+                                                hidden
+                                                onChange={fileUploadHandler}
+                                            />
+                                        </Button>
+
+                                        <div className="row">
+                                            <div className="col-lg-3 my-3">
+                                                <div className="card">
+                                                    {
+                                                        photoInfo.photoInfo ? (
+                                                            <img className='img-fluid' src={`${photoInfo.photoInfo.data}`} alt='' />
+                                                        ) : <Loading />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -152,6 +188,12 @@ const AddAlbum = () => {
                     </div>
                 </form>
             </section>
+                ): <div className='p-5'>
+                <span style={{ fontSize: "20px" }}>You dont have a Account please</span>
+                <Link to="/login" style={{ fontSize: "20px" }}>  Login</Link>
+
+            </div>
+            }
         </>
     )
 }

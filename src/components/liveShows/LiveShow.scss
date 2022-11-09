@@ -54,14 +54,20 @@
         }
     }
 
+    .liveShows:not(:last-child) {
+        border-bottom: 1px solid #938D8F;
+        padding: 40px 0;
+
+    }
+
     .liveShows {
         visibility: visible;
         // animation-name: slideInUp;
         margin-bottom: 45px;
 
+
         .show-row {
-            border-bottom: 1px solid #938d8f;
-            padding: 40px 0;
+
 
             &:first-child {
                 padding-top: 0%;
@@ -75,10 +81,10 @@
                     flex-wrap: wrap;
 
                     .show-date {
-                        max-width: 80px;
+                        max-width:100px;
                         background-color: #000000;
                         text-align: center;
-                        flex: 0 0 80px;
+                        flex: 0 0 90px;
                         padding-top: 8px;
                         border-radius: 5px 0 0 5px;
 
@@ -175,6 +181,45 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media(max-width:991px) {
+    .block {
+        .liveShows {
+            .show-row {
+                text-align: center;
+
+                .show-head {
+                    margin-bottom: 30px;
+                    justify-content: center;
+
+                    .show-info {
+                        max-width: 100%;
+                        flex: 0 0 100%;
+                        margin-top: 30px;
+                        padding-left: 0;
+                        text-align: center;
+                    }
+                }
+
+                .show-time {
+                    li {
+                        display: inline-block !important;
+                        margin-right: 30px;
+
+                        .sw-icon {
+                            display: inline-block;
+                        }
+                    }
+                }
+
+                .theme-btn {
+                    margin-top: 30px;
+                }
+            }
+
         }
     }
 }

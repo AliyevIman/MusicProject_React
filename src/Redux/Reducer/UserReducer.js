@@ -1,4 +1,4 @@
-import { USER_BEARTIST_ERROR, USER_BEARTIST_REQUEST, USER_BEARTIST_SUCCESS, USER_EDIT_ERROR, USER_EDIT_SUCCESS, USER_LOGIN_ERROR, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_ERROR, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../Constants/UserConstants";
+import { CLEAR_USER, CLEAR_USER_REGISTER, USER_BEARTIST_ERROR, USER_BEARTIST_REQUEST, USER_BEARTIST_SUCCESS, USER_EDIT_ERROR, USER_EDIT_SUCCESS, USER_LOGIN_ERROR, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_ERROR, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../Constants/UserConstants";
 
 export const RegisterReducer=(state={},action)=>{
 
@@ -9,6 +9,8 @@ export const RegisterReducer=(state={},action)=>{
             return {loading:true,userInfo:action.payload} 
             case USER_REGISTER_ERROR:
                 return {loading:false,userInfo:action.paload}
+                case CLEAR_USER_REGISTER:
+                    return {}
         default:
             return state;
     }
@@ -26,6 +28,8 @@ export const LoginReducer=(state={},action)=>{
            return {loading:false,userInfo:action.payload}
            case USER_EDIT_SUCCESS:
             return {loading:false, ...state, userInfo:action.payload}
+            case CLEAR_USER:
+                return {}
          case USER_EDIT_ERROR: 
             return {loading:false,userInfo:action.payload}
            case USER_LOGOUT:

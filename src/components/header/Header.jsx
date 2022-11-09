@@ -15,20 +15,26 @@ import jwtDecode from "jwt-decode";
 import { Box } from "@mui/system";
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
-
+import AddIcon from '@mui/icons-material/Add';
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
-
+import { useRef } from "react";
+import { useLayoutEffect } from "react";
+import { Fragment } from "react";
+import RemoveIcon from '@mui/icons-material/Remove';
 const Header = () => {
   const [show, setShow] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  console.log(isOpen)
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const myUser = useSelector((state) => state.loginUser);
   const { userInfo } = useSelector(st => st.loginUser);
 
-    if (userInfo) {
-        var decode = jwtDecode(userInfo.token.result.token);
-      }
-      const [anchorEl, setAnchorEl] = React.useState(null);
+  if (userInfo) {
+    var decode = jwtDecode(userInfo.token.result.token);
+  }
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,9 +42,23 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // const stickyHeader = useRef()
+  // useLayoutEffect(() => {
+  //   const Header = document.getElementById('Header')
+  //   let fixedTop = stickyHeader.current.offsetTop
+  //   const fixedHeader = () => {
+  //     if (window.pageYOffset > fixedTop) {
+  //       Header.classList.add('fixedTop')
+  //     } else {
+  //       Header.classList.remove('fixedTop')
+  //     }
+  //   }
+  //   window.addEventListener('scroll', fixedHeader)
+  // }, [])
   return (
-    <div className="Header">
-      <div className="container-fluid">
+    <div className="Header" >
+      <div className="container-fluid ">
         <div className="header-content d-flex justify-content-between align-item-center">
           <div className="logo w-100">
             <Link to="/">
@@ -57,7 +77,7 @@ const Header = () => {
                 <Link to="/liveshow">Live</Link>
               </li>
               {
-               myUser && myUser.userInfo && myUser.userInfo.token &&
+                myUser && myUser.userInfo && myUser.userInfo.token &&
                 <li>
                   <Link to="/artist">Artist</Link>
                 </li>
@@ -76,12 +96,13 @@ const Header = () => {
                       : 0}
                   </div>
                 </Link>
-              </li>       {myUser && myUser.userInfo && myUser.userInfo.token ? ( 
+              </li>
+              {myUser && myUser.userInfo && myUser.userInfo.token ? (
                 // <li className="email-box">
                 //   <Link className="user-email" to="#">
                 //     <span>{myUser.userInfo.email}</span>
                 //   </Link>
-                  
+
                 //   <Link className="user-email" to={`/usermusics/${decode.Id}`}>
                 //     <span>See Your Musics</span>
                 //   </Link>
@@ -97,108 +118,108 @@ const Header = () => {
                 //   </button>
                 // </li>
                 <React.Fragment>
-                <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                  <Tooltip title="Account settings">
-                    <IconButton
-                      onClick={handleClick}
-                      size="small"
-                      sx={{ ml: 2 }}
-                      aria-controls={open ? 'account-menu' : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                    >
-                      <Avatar sx={{ width: 32, height: 32 }}></Avatar>
-                    </IconButton>
-                  </Tooltip>
-                </Box>
-                <Menu
-                  anchorEl={anchorEl}
-                  id="account-menu"
-                  open={open}
-                  onClose={handleClose}
-                  onClick={handleClose}
-                  PaperProps={{
-                    elevation: 0,
-                    sx: {
-                      overflow: 'visible',
-                      filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                      mt: 1.5,
-                      '& .MuiAvatar-root': {
-                        width: 32,
-                        height: 32,
-                        ml: -0.5,
-                        mr: 1,
+                  <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                    <Tooltip title="Account settings">
+                      <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? 'account-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                      >
+                        <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        '&:before': {
+                          content: '""',
+                          display: 'block',
+                          position: 'absolute',
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: 'background.paper',
+                          transform: 'translateY(-50%) rotate(45deg)',
+                          zIndex: 0,
+                        },
                       },
-                      '&:before': {
-                        content: '""',
-                        display: 'block',
-                        position: 'absolute',
-                        top: 0,
-                        right: 14,
-                        width: 10,
-                        height: 10,
-                        bgcolor: 'background.paper',
-                        transform: 'translateY(-50%) rotate(45deg)',
-                        zIndex: 0,
-                      },
-                    },
-                  }}
-                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                >
-                  <MenuItem>
-                    <Avatar /> Profile :{myUser.userInfo.email}
-                  </MenuItem>
-                  <MenuItem>
-                    <Avatar /> My account
-                  </MenuItem>
-                  <Divider />
-                  <MenuItem>
-                    <ListItemIcon>
-                      <PersonAdd fontSize="small" />
-                    </ListItemIcon>
-                    <Link style={{textDecoration:"none",color:"#202020"}}  to={`/register`}>
+                    }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                  >
+                    <MenuItem>
+                      <Avatar /> Profile :{myUser.userInfo.email}
+                    </MenuItem>
+                    {/* <MenuItem>
+                      <Avatar /> My account
+                    </MenuItem> */}
+                    <Divider />
+                    <MenuItem>
+                      <ListItemIcon>
+                        <PersonAdd fontSize="small" />
+                      </ListItemIcon>
+                      <Link style={{ textDecoration: "none", color: "#202020" }} to={`/register`}>
 
-                    Add another account
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon>
-                    <SendIcon fontSize="small" />
-                    </ListItemIcon>
-                    <Link style={{textDecoration:"none",color:"#202020"}}  to={`/useralbum/${decode.Id}`}>
-                    <span>See Your Albums</span>
-                  </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon>
-                    <SendIcon fontSize="small" />
-                    </ListItemIcon>
-                    <Link style={{textDecoration:"none",color:"#202020"}}  to={`/usermusics/${decode.Id}`}>
-                    <span>See Your Musics</span>
-                  </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon>
-                      <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                  </MenuItem>
-                  <MenuItem onClick={() => dispatch(logoutAction())}>
-                    <ListItemIcon >
-                      <Logout fontSize="small" />
-                    </ListItemIcon >
-              
-                 {" "}
-                     <a style={{textDecoration:"none",color:"#202020"}} >
-                  Sign Out{" "}
+                        Add another account
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <ListItemIcon>
+                        <SendIcon fontSize="small" />
+                      </ListItemIcon>
+                      <Link style={{ textDecoration: "none", color: "#202020" }} to={`/useralbum/${decode.Id}`}>
+                        <span>See Your Albums</span>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <ListItemIcon>
+                        <SendIcon fontSize="small" />
+                      </ListItemIcon>
+                      <Link style={{ textDecoration: "none", color: "#202020" }} to={`/usermusics/${decode.Id}`}>
+                        <span>See Your Musics</span>
+                      </Link>
+                    </MenuItem>
+                    {/* <MenuItem>
+                      <ListItemIcon>
+                        <Settings fontSize="small" />
+                      </ListItemIcon>
+                      Settings
+                    </MenuItem> */}
+                    <MenuItem onClick={() => dispatch(logoutAction())}>
+                      <ListItemIcon >
+                        <Logout fontSize="small" />
+                      </ListItemIcon >
 
-                    </a>
-                    
-                  </MenuItem>
-                </Menu>
-              </React.Fragment>
-              ) : ( 
+                      {" "}
+                      <a style={{ textDecoration: "none", color: "#202020" }} >
+                        Sign Out{" "}
+
+                      </a>
+
+                    </MenuItem>
+                  </Menu>
+                </React.Fragment>
+              ) : (
                 <>
                   {" "}
                   <li>
@@ -212,11 +233,33 @@ const Header = () => {
             </ul>
           </nav>
 
-    
+
           <div className="menu-bar">
             <i onClick={() => setShow(!show)} >
               {
-                !show ? <MenuIcon /> : <CloseIcon />
+                <ul className="  list-unstyled d-flex">
+                  <li style={{ marginRight: "20px" }}>
+                    <Link style={{ textDecoration: "none", color: "#fff" }} className="text-deceration-none" to="/shop">
+                      {" "}
+                      <ShoppingBasketIcon />{" "}
+                      <div className="reqem">
+                        {cart && cart.cartitems
+                          ? cart.cartitems.reduce(
+                            (total, item) => total + item.quantity,
+                            0
+                          )
+                          : 0}
+                      </div>
+                    </Link>
+                  </li>
+                  <li>{
+                    !show ? (
+
+                      <MenuIcon />
+                    ) : <CloseIcon />
+                  }
+                  </li>
+                </ul>
               }
 
             </i>
@@ -226,16 +269,45 @@ const Header = () => {
             {
 
               show && (
-                <ul className={`list-unstyled ${show && `active`}`}>
+                <ul className={`list-unstyled open-menu ${show && `active`}`}>
                   <li><Link to="/">Home</Link> </li>
                   <li><Link to="/albumdisc">Albums</Link> </li>
                   <li><Link to="/liveshow">Live Shows</Link> </li>
+                  <li className="menu-item-has-children">
+                    <Link  to='/'>Account   <span onClick={() => setIsOpen(!isOpen)}>  { !isOpen? <AddIcon />:<RemoveIcon/> }</span>  </Link>
+                    {
+                      isOpen &&
+
+                      <ul className="list-unstyled second-open">
+                        <li>
+                          <Link to='/'>Add another account</Link>
+                        </li>
+                        <li>
+                          <Link to='/'>See Your Album</Link>
+                        </li>
+                        <li>
+                          <Link to='/'>See Your Musics</Link>
+                        </li>
+                      </ul>
+                    }
+                  </li>
                   {
-               myUser && myUser.userInfo && myUser.userInfo.token &&
-                <li>
-                  <Link to="/artist">Artist</Link>
-                </li>
-              }
+                    myUser && myUser.userInfo && myUser.userInfo.token ? (
+                      <>
+                        <li>
+                          <Link to="/artist">Artist </Link>
+
+                        </li>
+                        <li onClick={() => dispatch(logoutAction())}>
+                          <a href="#"> Sing Out</a>
+                        </li>
+                      </>
+
+                    ) : <>
+                      <li><Link to="/login" > Login</Link></li>
+                      <li><Link to="/register" > Register</Link></li>
+                    </>
+                  }
                 </ul>
               )
             }

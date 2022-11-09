@@ -62,31 +62,38 @@ const Shop = () => {
 
     }
 
-dispatch(ClearAll());
+    dispatch(ClearAll());
 
 
 
 
 
   };
-const handleUSer=()=>{
-  userInfo ? generatePDF() : Swal.fire(
-    'Zehmet olmasa qeydiyyatdan keciniz '
-  )
-}
+  const handleUSer = () => {
+    userInfo ? generatePDF() : Swal.fire(
+      'Zehmet olmasa qeydiyyatdan keciniz '
+    )
+  }
 
 
   return (
-    <section className="shop">
-      <Container>
-        {cartitems.length > 0 ? (
-          <Grid mt={5} container spacing={2}>
-            <Grid item xs={8}>
-              <table
-                style={{ color: "white" }}
-                className="table table-bordered text-center "
-              >
-                <thead>
+    <>
+      <section id="pager-section">
+        <div className="album-bg"></div>
+        <div className="container">
+          <div className="pager-content text-center">
+            <h2>Cart</h2>
+          </div>
+        </div>
+      </section>
+      <section id="cart">
+        <div className="container">
+          {cartitems.length > 0 ? (
+            <div className="container">
+              <div className="top">
+
+                <table
+                  style={{ color: "black" }}>
                   <tr>
                     <th>Image</th>
                     <th>Name</th>
@@ -95,8 +102,6 @@ const handleUSer=()=>{
                     <th>Sub Total</th>
                     <th>Action</th>
                   </tr>
-                </thead>
-                <tbody className="text-center">
                   {cartitems?.map((cart) => (
                     <tr key={cart.id}>
                       <td>
@@ -107,7 +112,7 @@ const handleUSer=()=>{
                         />
                       </td>
                       <td id="nm">{cart.name}</td>
-                      <td className="d-flex justify-content-center">
+                      <td className="d-flex justify-content-center align-items-center " style={{ border: 'none' }}>
                         <button
                           onClick={() =>
                             dispatch(handlerAddToCart(cart.id, -1))
@@ -117,9 +122,8 @@ const handleUSer=()=>{
                           -
                         </button>
                         <input
-                          style={{ width: "40%" }}
-                          className="form-control"
-                          type="number"
+                          style={{ width: "20px", border: "none", outline: 'none', resize: 'none', backgroundColor: 'transparent' }}
+
                           value={cart.quantity}
                           id="quant"
                         />
@@ -135,7 +139,7 @@ const handleUSer=()=>{
                         {cart.discount ? (
                           <>
                             <del>{cart.price}$</del>
-                            <span>{cart.discount}$</span>
+                            <p>{cart.discount}$</p>
                           </>
                         ) : (
                           <span>{cart.price}$</span>
@@ -159,40 +163,74 @@ const handleUSer=()=>{
                       </td>
                     </tr>
                   ))}
-                </tbody>
-              </table>
-            </Grid>
-            <Grid sx={{ color: "white" }} item xs={4}>
-              <div className="text-center card p-4">
-                <p>
-                  Total :
-                  {cartitems
-                    .reduce(
-                      (total, b) =>
-                        total +
-                        (b.discount > 0 ? b.discount : b.price) * b.quantity,
-                      0
-                    )
-                    .toFixed(2)}
-                  ${" "}
-                </p>
-                  <button onClick={()=>handleUSer()} className="btn btn-outline-success w-100 my-3 d-block">
-                    Sifarisi tamamla
-                  </button>
-                <button
-                  onClick={() => dispatch(ClearAll())}
-                  className="btn btn-outline-danger"
-                >
-                  Remove All
-                </button>
+                </table>
               </div>
-            </Grid>
-          </Grid>
-        ) : (
-          <h1 className="p">Cart Is Empty</h1>
-        )}
-      </Container>
-    </section>
+              <div className="bottom"  >
+                <div className="container">
+                  <div className="bottom">
+
+                    <div className="row">
+                      <div className="col-lg-7">
+                        <Link to="/liveshow" style={{ textDecoration: "none", color: "white" }}>
+                          <button className="shoppingButton">
+                            Continue shopping
+                          </button></Link>
+                      </div>
+                      <div className="col-lg-5">
+                        <h3>
+                          Total :
+                        </h3>
+                        <table>
+                          <tr>
+                            <td>
+                              <div className="row justify-content-between align-items-center">
+                                <div className="col-lg-8">Total price</div>
+                                <div className="col-lg-4 price" >
+
+                                  {cartitems
+                                    .reduce(
+                                      (total, b) =>
+                                        total +
+                                        (b.discount > 0 ? b.discount : b.price) * b.quantity,
+                                      0
+                                    )
+                                    .toFixed(2)}
+                                  ${" "}
+
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                        <button onClick={() => handleUSer()} className="btn btn-outline-success w-100 my-3 d-block">
+                          Sifarisi tamamla
+                        </button>
+                        <button
+                          onClick={() => dispatch(ClearAll())}
+                          className="btn btn-outline-danger"
+                        >
+                          Remove All
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          ) : (
+            <div className="d-grid justify-content-center align-items-center">
+              <h3 className="p">Cart Is Empty
+              </h3>
+              <Link to="/liveshow" style={{ textDecoration: "none", color: "white" }}>
+                <button className="shoppingButton">
+                  Continue shopping
+                </button></Link>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 

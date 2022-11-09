@@ -82,9 +82,6 @@ const AlbumDetail = () => {
                                                 <h3>
                                                     <p>{name}</p>
                                                 </h3>
-                                                <audio controls>
-                                                    <source src={c.musicUrl} />
-                                                </audio>
                                             </div>
                                         </div>
                                     </div>

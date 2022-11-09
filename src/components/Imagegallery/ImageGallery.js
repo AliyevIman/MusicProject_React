@@ -2,10 +2,10 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Gallery, Item } from 'react-photoswipe-gallery';
-import { BASE_URL } from '../api/BaseConfig';
+import { BASE_URL } from '../../api/BaseConfig';
 import AddIcon from '@mui/icons-material/Add';
 
-import "../pages/Home.scss";
+import "../../pages/Home.scss";
 import 'photoswipe/style.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -57,6 +57,7 @@ const ImageGallery = () => {
                 {
                     musicMusician &&
                     musicMusician.map(c => (
+                        c.isNew===true&&
                         // style={{ position: "absolute", left: "0px", top: "205px" }}
                         <div className='col-lg-6 col-md-6 col-sm-6 mb-5' >
                             <div className='gallery-col overlay2 '>

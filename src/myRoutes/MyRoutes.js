@@ -13,6 +13,7 @@ import AddAlbum from '../components/Album/AddAlbum'
 import MusicianAlbums from '../pages/UserAccountAPges/MusicianAlbums'
 import MusicianAlbumDetail from '../components/Album/MusicianAlbumDetail'
 import AlbumDetail from '../pages/AlbumDetail'
+import AddMusic from '../components/BeArtist/AddMusic'
 
 const MyRoutes = () => {
   return (
@@ -26,6 +27,8 @@ const MyRoutes = () => {
     <Route path="/artist" element={<BeArtist/>}/>
     <Route path="/addlive" element={<AddLiveShow/>}/>
     <Route path="/addalbum" element={<AddAlbum/>}/>
+    <Route path="/addmusic" element={<AddMusic/>}/>
+
 
     <Route path="/usermusics/:id" element={<UserMusics/>}/>
     <Route path="/useralbum/:id" element={<MusicianAlbums/>}/>

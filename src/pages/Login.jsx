@@ -3,13 +3,18 @@ import { useDispatch } from 'react-redux'
 import { loginAction } from '../Redux/Actions/UserAction'
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { CLEAR_USER } from '../Redux/Constants/UserConstants';
+import Swal from 'sweetalert2';
+import { Alert } from '@mui/material';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("")
   const dispatch = useDispatch();
   const navi = useNavigate();
-  const { userInfo } = useSelector(st => st.loginUser);
+  const {userInfo}= useSelector(st => st.loginUser);
 console.log(userInfo);
+
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -17,10 +22,21 @@ console.log(userInfo);
   }
 
   useEffect(() => {
-    if (userInfo && userInfo.token) {
-      navi("/")
+    if (userInfo) {
+      if (userInfo.status===200) {
+        navi("/")
+        console.log("sikim icin");
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Bir xəta baş verdi.',
+          text: 'Emailiniz və ya şifrəniz yanlışdır!'
+        })
+
+      }
     }
-  }, [navi, userInfo])
+  }, [ userInfo])
 
   return (
     <>
@@ -31,6 +47,7 @@ console.log(userInfo);
           <div className="container">
             <div className="pager-content text-center">
               <h2>Login</h2>
+           
             </div>
           </div>
         </section>
@@ -45,7 +62,11 @@ console.log(userInfo);
         <div className="row justify-content-center">
           <div className="col-lg-6">
             <h1 className="fs-5 mb-4">Login</h1>
-
+            {errorMessage && (
+          <Alert variant="outlined" severity="error">
+            {errorMessage}
+          </Alert>
+          )}
             <form method="post" onSubmit={submitForm}>
 
               <div className="form-outline mb-4">

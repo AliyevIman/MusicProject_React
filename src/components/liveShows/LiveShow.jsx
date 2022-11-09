@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { AddToCart } from "../../Redux/Actions/CartAction";
 import "react-toastify/dist/ReactToastify.css";
-
 const LiveShow = () => {
   const [liveshow, setLiveshow] = useState([]);
   const dispatch = useDispatch();
@@ -29,15 +28,35 @@ const LiveShow = () => {
     {
       dispatch(AddToCart(id, quantity));
     }
-  const notify = () => toast(`${name} sebete elave olundu`);
+    const notify = () => toast(`${name} sebete elave olundu`);
 
     notify(name);
-  
+
   };
+
+  const longEnUSFormatter = new Intl.DateTimeFormat('nl-BE', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+
+  // console.log(a);
+  //   const currentDayOfMonth = a.getDate();
+  // const currentMonth = a.getMonth();
+  // console.log(currentDayOfMonth);
+
+
+  // const currentDayOfMonth = a.getDate();
+  // const currentMonth = a.getMonth(); // Be careful! January is 0, not 1
+  // const currentYear = a.getFullYear();
+  // console.log(currentDayOfMonth);
+
   return (
     <section className="block">
       <ToastContainer />
-
       <div className="lives"></div>
 
       <div className="container">
@@ -55,8 +74,13 @@ const LiveShow = () => {
                   <div className="col-lg-7">
                     <div className="show-head">
                       <div className="show-date">
-                        <h4>19</h4>
-                        <h5>Jan</h5>
+                        <h4>{
+
+                          longEnUSFormatter.format(new Date(c.startTime)).split(' ')[0]
+
+                        }</h4>
+                        <h5>{longEnUSFormatter.format(new Date(c.startTime)).split(' ')[1]}</h5>
+
                       </div>
                       <div className="show-thumb">
                         <img
@@ -66,29 +90,29 @@ const LiveShow = () => {
                       </div>
                       <div className="show-info">
                         <h3>{c.name}</h3>
-                        <span>{c.description} </span>
+                        <span>{`${c.description}`.charAt(0).toUpperCase() + c.description.slice(1)} </span>
                       </div>
                     </div>
                   </div>
                   <div className="col-lg-3">
                     <ul className="show-time">
-                      <li>
-                        <div className="sw-icon">
+                      <li style={{}}>
+                        <div className="sw-icon" >
                           <LocationOnIcon />
                         </div>
-                        {c.loacation}
+                        {`${c.loacation}`.charAt(0).toUpperCase() + c.loacation.slice(1)}
                       </li>
                       <li>
                         <div className="sw-icon">
                           <ScheduleIcon />
                         </div>
-                        <span>{c.startTime}</span>
+                        <span>{longEnUSFormatter.format(new Date(c.startTime)).split(' ')[4]}</span>
                       </li>
                     </ul>
                   </div>
                   <div className="col-lg-2">
                     <button
-                      onClick={() => handlerAddToCart(c.id,c.name)}
+                      onClick={() => handlerAddToCart(c.id, c.name)}
                       className="theme-btn"
                     >
                       Buy Tickets

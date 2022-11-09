@@ -5,67 +5,69 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-
+import EmailIcon from '@mui/icons-material/Email';
+import SendIcon from '@mui/icons-material/Send';
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 function Footer() {
-  return (
-    <section className='section-footer'>
-      <ScrollToTop smooth top="20" />
-      <div className="footer-top">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8">
-              <div className="footer-top-left">
-                <div className="row">
-                  <div className="col-lg-4">
-                    <ul className="list-unstyled">
-                      <li><h4>About the Company</h4></li>
-                      <li>About Us</li>
-                      <li>Careers</li>
-                      <li>Affiliates</li>
-                      <li>Press</li>
-                      <li>Investor Relations</li>
-                    </ul>
-                  </div>
-                  <div className="col-lg-4">
-                    <ul className="list-unstyled">
-                      <li><h4>Information</h4></li>
-                      <li>About Us</li>
-                      <li>Careers</li>
-                      <li>Affiliates</li>
-                      <li>Press</li>
-                      <li>Investor Relations</li>
-                    </ul>
-                  </div>
-                  <div className="col-lg-4">
-                    <ul className="list-unstyled">
-                      <li><h4>Site Terms</h4></li>
-                      <li>Sitemap</li>
-                      <li>Careers</li>
-                      <li>Affiliates</li>
-                      <li>Press</li>
-                      <li>Investor Relations</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="footer-top-right">
-                <ul className="list-unstyled">
-                  <li><h4>Newsletter Subscribe</h4></li>
-                  <li className='yellow-li'>Get 5% OFF when you signup for our email newsletter!</li>
-                  <li><input type="text" /></li>
-                  <li><span>By entering your email address, you agree to receive offers, promotions, and other commercial.</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  const form = useRef();
+  const navi = useNavigate();
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-      <div className="footer-bottom">
+    emailjs.sendForm('service_v0oh9t8', 'template_b30wsfl', form.current, 'TKiLo8a30fb70K3yg')
+      .then((result) => {
+        Swal.fire({
+          icon: "success",
+          title: `Sizin sorgunuz gonderildi, artıq siz email vasitesi ile bizden mesaj alaceysüz . Xoş dinlemeler`,
+          showConfirmButton: false,
+          timer: 4000,
+        }).then(c => {
+          e.target.reset();
+        })
+      }, (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Bir xəta baş verdi.',
+          text: `${error}`
+        })
+      });
+     
+
+  };
+  return (
+    <>
+      <section className='block'>
+        <div className="fixed-bg black-bg" ></div>
+        <div className="subscribe-section text-center wow slideInUp">
+          <h2>Stay in Touch</h2>
+          <span>Subscribe to our newsletter and stay updated on the latest music albums, live shows and music releases.</span>
+
+
+          <form className='subs-form' ref={form} onSubmit={sendEmail}>
+            <div className="input-field" >
+              <input type="email" name="user_email" placeholder='Enter your email address' />
+              <span className='em-icon'>
+                <EmailIcon />
+              </span>
+            </div>
+            <button type='submit' value="Send" className='theme-btn'>
+              <SendIcon />
+              Subscribe
+            </button>
+          </form>
+
+
+
+        </div>
+
+
+      </section>
+      <footer className="footer-bottom">
         <div className="container">
-          <div class="row align-items-center">
+          <div class="row footer-content align-items-center">
             <div className="col-lg-6">
               <div className="footer-bottom-left">
                 <span>© 2022 Furnihaus. All rights reserved</span>
@@ -73,19 +75,18 @@ function Footer() {
             </div>
             <div className="col-lg-6">
               <div className="footer-bottom-right">
-                <div className="footer-icons">
-                  <a href="#"><FacebookIcon/></a>
-                  <a href="#"><TwitterIcon/></a>
-                  <a href="#"><InstagramIcon/></a>
-                  <a href="#"><YouTubeIcon/></a>
-                </div>
+                <ul className="footer-icons v2 list-unstyled ">
+                  <li><FacebookIcon /></li>
+                  <li><TwitterIcon /></li>
+                  <li><InstagramIcon /></li>
+                  <li><YouTubeIcon /></li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-    </section>
+      </footer>
+    </>
   )
 }
 

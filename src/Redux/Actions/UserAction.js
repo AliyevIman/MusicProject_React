@@ -43,7 +43,7 @@ export const loginAction = (email, password) => async (dispatch) => {
     catch (error) {
         dispatch({
             type: USER_LOGIN_ERROR,
-            payload: error.message
+            payload: error.response
         })
     }
 }

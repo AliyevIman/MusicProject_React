@@ -75,9 +75,11 @@
             transition: transform 0.4s cubic-bezier(0.45, 0.66, 0.27, 0.99), opacity 0.3s;
             transform: translateY(0);
             opacity: 1;
-            &:hover{
+
+            &:hover {
                 transform: translateY(-30px);
             }
+
             .menu {
                 background: #ffffff;
                 border-radius: 8px;
@@ -90,13 +92,14 @@
                 visibility: hidden;
                 transform: translateY(-20px);
                 transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-              }
-              
-              .menu.active {
+            }
+
+            .menu.active {
                 opacity: 1;
                 visibility: visible;
                 transform: translateY(0);
-              }
+            }
+
             .album-thumb {
                 margin-bottom: 26px;
 
@@ -105,10 +108,11 @@
                     color: inherit;
                 }
             }
-            .album-detail{
-                h3{
-                  
-                    a{
+
+            .album-detail {
+                h3 {
+
+                    a {
                         display: inline-block;
                         text-decoration: none;
                         color: #ffffff;
@@ -116,12 +120,13 @@
                         margin-bottom: 5px;
                     }
                 }
-               span{
-                display: block;
-                color: #f559a4;
-                font-size: 20px;
-                font-family: 'Barlow';
-               } 
+
+                span {
+                    display: block;
+                    color: #f559a4;
+                    font-size: 20px;
+                    font-family: 'Barlow';
+                }
             }
         }
     }

@@ -1,9 +1,12 @@
+import { Alert } from 'bootstrap';
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { registerAction } from '../Redux/Actions/UserAction';
+import { CLEAR_USER_REGISTER } from '../Redux/Constants/UserConstants';
 
 const Register = () => {
   const [firstName, setFirstname] = useState("");
@@ -11,6 +14,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("")
   const dispatch = useDispatch();
   const myUserInfo = useSelector(st => st.register)
   const navi = useNavigate()
@@ -19,11 +23,19 @@ const Register = () => {
     dispatch(registerAction(firstName, lastName, email, password, confirmPassword));
   };
   useEffect(() => {
-    if (myUserInfo.userInfo&&myUserInfo.userInfo.status===201) {
-      navi("/login")
-    }
-  }, [myUserInfo.userInfo, navi])
+    if (myUserInfo.userInfo && myUserInfo.userInfo.status === 201) {
+      Swal.fire({
+        icon: "success",
+        title: "Təbriklər! Sizin hesabınız müvəffəqiyyətlə yaradıldı! Sehifeye giriş etmek üçün  LogIn edin zehmet olmasa",
+        showConfirmButton: false,
+        timer: 1500,
+      }).then((c) => {
+        navi("/login");
+        dispatch({ type: CLEAR_USER_REGISTER })
 
+      });
+    } 
+  }, [myUserInfo.userInfo, navi])
   return (
     <>
       <section id='LiveShow'>
@@ -32,6 +44,9 @@ const Register = () => {
           <div className="container">
             <div className="pager-content text-center">
               <h2>Register</h2>
+              <alert variant="outlined" severity="error">
+            {error}
+          </alert>
             </div>
           </div>
         </section>
@@ -52,10 +67,12 @@ const Register = () => {
                 <input
                   onChange={(e) => setFirstname(e.target.value)}
                   placeholder="Firstname"
-                  type="text"
+                  type="name"
                   id="form2Example1"
+                  required={true}
                   className="form-control"
                 />
+                {firstName.length > 10 && "name is so long for "}
                 <label className="form-label" for="form2Example1">
                   Firstname
                 </label>
@@ -67,6 +84,8 @@ const Register = () => {
                   type="text"
                   id="form2Example1"
                   className="form-control"
+                  required={true}
+
                 />
                 <label className="form-label" for="form2Example1">
                   Lastname
@@ -89,6 +108,8 @@ const Register = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   id="form2Example2"
+                  required={true}
+
                   className="form-control"
                 />
                 <label className="form-label" for="form2Example2">
@@ -100,6 +121,8 @@ const Register = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   type="password"
                   id="form2Example2"
+                  required={true}
+
                   className="form-control"
                 />
                 <label className="form-label" for="form2Example2">
@@ -115,6 +138,8 @@ const Register = () => {
                       type="checkbox"
                       value=""
                       id="form2Example31"
+                      required={true}
+
                       checked
                     />
                     <label className="form-check-label" for="form2Example31">
@@ -135,7 +160,7 @@ const Register = () => {
 
               <div className="text-center">
                 <p>
-                Already have a Account ?<Link to="/login">Login</Link>
+                  Already have a Account ?<Link to="/login">Login</Link>
                 </p>
                 {/* <p>or sign up with:</p>
                 <button type="button" className="btn btn-link btn-floating mx-1">

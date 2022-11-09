@@ -6,6 +6,7 @@ import { albumListReducers, AlbumReducer, albumReducers, albumUserListReducers }
 import { BeArtistReducer, LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
 import { muisicDeleteReducers, muisicEditReducers, muisicListReducers, muisicReducers, musicUpdateReducer } from "./Reducer/MusicReducer";
 import { liveDeleteReducers, liveEditReducers, liveListReducers, liveReducers, liveUpdateReducer } from "./Reducer/LiveShowReducer";
+import { musicfileReducers, photoReducers } from "./Reducer/FileReducer";
 
 const reducer   =combineReducers({
     cart:Cartreducer,
@@ -30,6 +31,10 @@ const reducer   =combineReducers({
     liveEdit:liveEditReducers,
     liveUpdate:liveUpdateReducer,
     //liveShow
+    photoAdd:photoReducers,
+    musicfileAdd:musicfileReducers
+    //
+  
 
 
 })
