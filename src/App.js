@@ -15,7 +15,6 @@ function App() {
   <BrowserRouter>
      <Provider store={store}>
       <Header/>
-      <MusicPlayer/>
        <MyRoutes/>
       <Footer/>
       </Provider>

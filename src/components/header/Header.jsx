@@ -21,10 +21,10 @@ import { useRef } from "react";
 import { useLayoutEffect } from "react";
 import { Fragment } from "react";
 import RemoveIcon from '@mui/icons-material/Remove';
+import MusicPlayer from "../MusicPlayer/MusicPlayer";
 const Header = () => {
   const [show, setShow] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  console.log(isOpen)
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -58,6 +58,8 @@ const Header = () => {
   // }, [])
   return (
     <div className="Header" >
+      <MusicPlayer/>
+
       <div className="container-fluid ">
         <div className="header-content d-flex justify-content-between align-item-center">
           <div className="logo w-100">
@@ -273,6 +275,8 @@ const Header = () => {
                   <li><Link to="/">Home</Link> </li>
                   <li><Link to="/albumdisc">Albums</Link> </li>
                   <li><Link to="/liveshow">Live Shows</Link> </li>
+                  {
+userInfo&&
                   <li className="menu-item-has-children">
                     <Link  to='/'>Account   <span onClick={() => setIsOpen(!isOpen)}>  { !isOpen? <AddIcon />:<RemoveIcon/> }</span>  </Link>
                     {
@@ -280,17 +284,18 @@ const Header = () => {
 
                       <ul className="list-unstyled second-open">
                         <li>
-                          <Link to='/'>Add another account</Link>
+                          <Link to='/register'>Add another account</Link>
                         </li>
                         <li>
-                          <Link to='/'>See Your Album</Link>
+                          <Link to={`/useralbum/${decode.Id}`}>See Your Album</Link>
                         </li>
                         <li>
-                          <Link to='/'>See Your Musics</Link>
+                          <Link to={`/usermusics/${decode.Id}`}>See Your Musics</Link>
                         </li>
                       </ul>
                     }
                   </li>
+                  }
                   {
                     myUser && myUser.userInfo && myUser.userInfo.token ? (
                       <>

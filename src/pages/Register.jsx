@@ -1,29 +1,39 @@
-import { Alert } from 'bootstrap';
+
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { registerAction } from '../Redux/Actions/UserAction';
 import { CLEAR_USER_REGISTER } from '../Redux/Constants/UserConstants';
-
+// import { useForm } from "react-hook-form";
 const Register = () => {
-  const [firstName, setFirstname] = useState("");
-  const [lastName, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  
   const [error, setError] = useState("")
   const dispatch = useDispatch();
-  const myUserInfo = useSelector(st => st.register)
+  const {userInfo} = useSelector(st => st.register)
+  console.log(userInfo);
   const navi = useNavigate()
-  const submitForm = (e) => {
-    e.preventDefault();
-    dispatch(registerAction(firstName, lastName, email, password, confirmPassword));
+  const submitForm = (data,e) => {
+   e.preventDefault();
+    if(data.password!==data.confirmPassword){
+      Swal.fire({
+        icon: "error",
+        title: "Password ve confirm password eyni deyil ,Zehmtet olmasa yeniden yoxlayin",
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }else{
+      dispatch(registerAction(data));
+
+    }
+    // data.preventDefault();
   };
   useEffect(() => {
-    if (myUserInfo.userInfo && myUserInfo.userInfo.status === 201) {
+    if (userInfo && userInfo.status === 201) {
       Swal.fire({
         icon: "success",
         title: "Təbriklər! Sizin hesabınız müvəffəqiyyətlə yaradıldı! Sehifeye giriş etmek üçün  LogIn edin zehmet olmasa",
@@ -34,8 +44,9 @@ const Register = () => {
         dispatch({ type: CLEAR_USER_REGISTER })
 
       });
-    } 
-  }, [myUserInfo.userInfo, navi])
+    }
+
+  }, [userInfo, navi])
   return (
     <>
       <section id='LiveShow'>
@@ -45,8 +56,8 @@ const Register = () => {
             <div className="pager-content text-center">
               <h2>Register</h2>
               <alert variant="outlined" severity="error">
-            {error}
-          </alert>
+                {error}
+              </alert>
             </div>
           </div>
         </section>
@@ -62,29 +73,28 @@ const Register = () => {
           <div className="col-lg-6">
             <h1 className="fs-5 mb-4">Register</h1>
 
-            <form method="post" onSubmit={submitForm}>
+            <form method="post" onSubmit={handleSubmit( submitForm)}>
               <div className="form-outline mb-4">
                 <input
-                  onChange={(e) => setFirstname(e.target.value)}
                   placeholder="Firstname"
                   type="name"
                   id="form2Example1"
-                  required={true}
                   className="form-control"
+                  {...register("firstName", { required: true, maxLength: 10 })}
                 />
-                {firstName.length > 10 && "name is so long for "}
+                {/* {firstName.length > 10 && "name is so long for "} */}
                 <label className="form-label" for="form2Example1">
                   Firstname
                 </label>
+                {errors.firstName && <p>Please check the First Name,maksimum uzunluq 10 olmalidir </p>}
               </div>
               <div className="form-outline mb-4">
                 <input
-                  onChange={(e) => setLastname(e.target.value)}
                   placeholder="lastname"
                   type="text"
                   id="form2Example1"
                   className="form-control"
-                  required={true}
+                  {...register("lastName",{required:true,maxLength:10})}
 
                 />
                 <label className="form-label" for="form2Example1">
@@ -93,43 +103,55 @@ const Register = () => {
               </div>
               <div className="form-outline mb-4">
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
-                  id="form2Example1"
+                  id="form2@Example.com"
                   className="form-control"
+                  placeholder='Email Adress'
+                  {...register("email",
+                    {
+                      required: true,
+                      pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    })}
                 />
                 <label className="form-label" for="form2Example1">
                   Email address
                 </label>
+                {errors.email && <p style={{ color: "red" }} className="text-error">Please check the Email</p>}
               </div>
 
               <div className="form-outline mb-4">
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   id="form2Example2"
-                  required={true}
-
+                  placeholder='Password'
+                  {...register("password", {
+                    required: true,
+                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
+                  })}
                   className="form-control"
                 />
                 <label className="form-label" for="form2Example2">
                   Password
                 </label>
+                {errors.password && <p>Parol boyuk herifle basm=lamali ve reqem olmalidir icinde </p>}
               </div>
               <div className="form-outline mb-4">
                 <input
-                  onChange={(e) => setConfirmPassword(e.target.value)}
                   type="password"
                   id="form2Example2"
-                  required={true}
+                  placeholder='Confirm Password'
 
+                  required={true}
+                  {...register("confirmPassword", {
+                    required: true,
+                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
+                  })}
                   className="form-control"
                 />
                 <label className="form-label" for="form2Example2">
                   Confirm Password
                 </label>
               </div>
-
               <div className="row mb-4">
                 <div className="col d-flex justify-content-center">
                   <div className="form-check">

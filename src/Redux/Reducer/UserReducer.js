@@ -1,3 +1,4 @@
+import { error } from "jquery";
 import { CLEAR_USER, CLEAR_USER_REGISTER, USER_BEARTIST_ERROR, USER_BEARTIST_REQUEST, USER_BEARTIST_SUCCESS, USER_EDIT_ERROR, USER_EDIT_SUCCESS, USER_LOGIN_ERROR, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_ERROR, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../Constants/UserConstants";
 
 export const RegisterReducer=(state={},action)=>{
@@ -18,7 +19,7 @@ export const RegisterReducer=(state={},action)=>{
 }
 
 
-export const LoginReducer=(state={},action)=>{
+export const LoginReducer=(state={userInfo:{}},action)=>{
     switch (action.type) {
         case USER_LOGIN_REQUEST:
             return {loading:true}
@@ -48,6 +49,8 @@ export const BeArtistReducer=(state={},action)=>{
             return { loading:false ,userInfo:action.payload} 
             case USER_BEARTIST_ERROR:
                 return {loading:false,error:action.paload}
+                case CLEAR_USER:
+                    return {}
         default:
             return state;
     }
