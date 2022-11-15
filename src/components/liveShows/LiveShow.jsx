@@ -53,7 +53,6 @@ const LiveShow = () => {
   // const currentMonth = a.getMonth(); // Be careful! January is 0, not 1
   // const currentYear = a.getFullYear();
   // console.log(currentDayOfMonth);
-
   return (
     <section className="block">
       <ToastContainer />
@@ -67,7 +66,6 @@ const LiveShow = () => {
           </span>
         </div>
         {liveshow.map((c) => (
-          <>
             <div key={c.Id} className="liveShows">
               <div className="show-row">
                 <div className="row">
@@ -121,7 +119,6 @@ const LiveShow = () => {
                 </div>
               </div>
             </div>
-          </>
         ))}
       </div>
     </section>

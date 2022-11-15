@@ -19,7 +19,6 @@ const AddLiveShow = () => {
     const [stock, setStock] = useState("")
     const [price, setPrice] = useState("")
     const [discount, setDiscount] = useState("")
-    const [ticketCount, setTicketCount] = useState("")
     const { userInfo } = useSelector(st => st.loginUser);
     const { liveInfo, loading } = useSelector(state => state.addedLiveRed)
     const photoInfo = useSelector(st => st.photoAdd);
@@ -58,7 +57,6 @@ const AddLiveShow = () => {
                 stock,
                 price,
                 discount,
-                ticketCount,
                 photo: photoInfo.photoInfo.data,
                 musicians: [
     
@@ -214,20 +212,6 @@ const AddLiveShow = () => {
                                                                 onChange={(e) => { setDiscount(e.target.value) }}
                                                             />
                                                         </div>
-                                                        <div className="mb-4">
-                                                            <label htmlFor="product_featured" className="form-label">
-                                                                Ticket Count
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                placeholder="Type here"
-                                                                className="form-control"
-                                                                id="product_price"
-                                                                value={ticketCount}
-                                                                onChange={(e) => { setTicketCount(e.target.value) }}
-                                                            />
-                                                        </div>
-
                                                         <div className="mb-4">
                                                             <Button
                                                                 fullWidth

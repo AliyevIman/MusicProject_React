@@ -278,7 +278,7 @@ const Header = () => {
                   {
 userInfo&&
                   <li className="menu-item-has-children">
-                    <Link  to='/'>Account   <span onClick={() => setIsOpen(!isOpen)}>  { !isOpen? <AddIcon />:<RemoveIcon/> }</span>  </Link>
+                    <a href="#">Account   <span onClick={() => setIsOpen(!isOpen)}>  { !isOpen? <AddIcon />:<RemoveIcon/> }</span>  </a>
                     {
                       isOpen &&
 

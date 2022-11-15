@@ -17,16 +17,11 @@ import BeArtist from './BeArtist';
 const AddMusic = () => {
     const dispatch = useDispatch();
     const [Name, setName] = useState("")
-    const [musicUrl, setMusicUrl] = useState("")
     const [musicVideo, setMusicVideo] = useState("")
     const [author, setAuthor] = useState("")
     const [isFeatured, setIsFeatured] = useState(false)
-    const [photo, setPhoto] = useState("")
     const [albumId, setAlbumId] = useState(null)
-    const [userIdfirst, setUserId] = useState("")
     const [albums, setAlbums] = useState([])
-    // console.log(parseInt(albumId));
-    // const { albums } = useSelector(state => state.albumList);
     const { userInfo } = useSelector(st => st.loginUser);
     const photoInfo = useSelector(st => st.photoAdd);
     const musicfileInfo = useSelector(st => st.musicfileAdd);

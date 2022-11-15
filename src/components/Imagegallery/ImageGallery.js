@@ -59,8 +59,8 @@ const ImageGallery = () => {
                     musicMusician.map(c => (
                         c.isNew===true&&
                         // style={{ position: "absolute", left: "0px", top: "205px" }}
-                        <div className='col-lg-6 col-md-6 col-sm-6 mb-5' >
-                            <div className='gallery-col overlay2 '>
+                        <div  className='col-lg-6 col-md-6 col-sm-6 mb-5' >
+                            <div key={c.id} className='gallery-col overlay2 '>
 
 
                                 <Item

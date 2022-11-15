@@ -48,7 +48,7 @@ function Footer() {
 
           <form className='subs-form' ref={form} onSubmit={sendEmail}>
             <div className="input-field" >
-              <input type="email" name="user_email" placeholder='Enter your email address' />
+              <input type="email" required="true" name="user_email" placeholder='Enter your email address' />
               <span className='em-icon'>
                 <EmailIcon />
               </span>

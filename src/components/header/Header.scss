@@ -259,8 +259,9 @@
                             width: 100%;
                             position: relative;
                             padding: 15px 10px;
-                            svg{
-                               
+
+                            svg {
+
                                 position: absolute;
                                 top: 50%;
                                 right: 10px;
@@ -278,11 +279,13 @@
                             // position: absolute;
                             right: 0;
                             top: 0;
+
                             // background-color: red;
                             li {
                                 float: left;
                                 width: 100%;
-                                a{
+
+                                a {
                                     color: #fff;
 
                                     border-bottom: 0;
@@ -292,7 +295,7 @@
                                     font-weight: 600;
                                     text-transform: uppercase;
                                     letter-spacing: 1px;
-                                    border-bottom: 1px solid rgba(255,255,255,0.10);
+                                    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
                                     float: left;
                                     width: 100%;
                                     position: relative;
@@ -350,6 +353,26 @@
 @media (max-width:636px) {
     .Header {
         padding-top: 10px;
+
+        .header-content {
+            .logo{
+                img{
+                    max-width: 100px;
+                }
+            }
+            .menu-bar {
+                ul {
+                    li {
+                        padding: 0 10px 10px;
+                    }
+                }
+            }
+            .mobile-menu{
+                .open-menu{
+                   width: 212px;
+                }
+            }
+        }
 
         .container-fluid {
             padding: 0 10px;

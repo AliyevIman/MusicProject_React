@@ -146,28 +146,6 @@
     }
 }
 
-// Small devices (landscape phones, 576px and up)
-@media (max-width: 576px) {
-    #cart {
-        .top {
-            table {
-                tr {
-                    td {
-                        img {
-                            width: 50px;
-                        }
-                    }
-
-                    .dnone {
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
-}
-
-
 .shoppingButton {
     padding: 15px 45px;
     margin: 10px 15px;
@@ -185,259 +163,44 @@
         color: black;
     }
 }
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    #cart {
+        .top {
+            table {
+                padding: 10px;
+                tr {
+                    // padding: 10px;
+                    th{
+                        font-size: 9px;
+                    }
+                    // font-size: 10px;
+                    // td {
+                    //     img {
+                    //         width: 50%;
+                    //     }
+                    // }
 
-//
-// <section className="shop">
-//         <Container>
-//           {cartitems.length > 0 ? (
-//             <Grid mt={5} container spacing={2}>
-//               <Grid item xs={8}>
-//                 <table
-//                   style={{ color: "white" }}
-//                   className="table table-bordered text-center "
-//                 >
-//                   <thead>
-//                     <tr>
-//                       <th>Image</th>
-//                       <th>Name</th>
-//                       <th>Quantity</th>
-//                       <th>Price</th>
-//                       <th>Sub Total</th>
-//                       <th>Action</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody className="text-center">
-//                     {cartitems?.map((cart) => (
-//                       <tr key={cart.id}>
-//                         <td>
-//                           <img
-//                             className="img-fluid"
-//                             src={cart.photo}
-//                             alt="liveShowImage"
-//                           />
-//                         </td>
-//                         <td id="nm">{cart.name}</td>
-//                         <td className="d-flex justify-content-center">
-//                           <button
-//                             onClick={() =>
-//                               dispatch(handlerAddToCart(cart.id, -1))
-//                             }
-//                             className="btn btn-lg "
-//                           >
-//                             -
-//                           </button>
-//                           <input
-//                             style={{ width: "40%" }}
-//                             className="form-control"
-//                             type="number"
-//                             value={cart.quantity}
-//                             id="quant"
-//                           />
-//                           <button
-//                             onClick={() => dispatch(handlerAddToCart(cart.id, 1))}
-//                             className="btn btn-lg "
-//                           >
-//                             +
-//                           </button>
-//                         </td>
-
-//                         <td>
-//                           {cart.discount ? (
-//                             <>
-//                               <del>{cart.price}$</del>
-//                               <span>{cart.discount}$</span>
-//                             </>
-//                           ) : (
-//                             <span>{cart.price}$</span>
-//                           )}
-//                         </td>
-//                         <td>
-//                           {(
-//                             (cart.discount > 0 ? cart.discount : cart.price) *
-//                             cart.quantity
-//                           ).toFixed(2)}
-//                         </td>
-//                         <td>
-//                           <DeleteOutlineIcon
-//                             sx={{
-//                               color: "red",
-//                               fontSize: "2em",
-//                               cursor: "pointer",
-//                             }}
-//                             onClick={() => dispatch(RemoveCart(cart.id))}
-//                           ></DeleteOutlineIcon>
-//                         </td>
-//                       </tr>
-//                     ))}
-//                   </tbody>
-//                 </table>
-//               </Grid>
-//               <Grid sx={{ color: "white" }} item xs={4}>
-//                 <div className="text-center card p-4">
-//                   <p>
-//                     Total :
-                        // {cartitems
-                        //   .reduce(
-                        //     (total, b) =>
-                        //       total +
-                        //       (b.discount > 0 ? b.discount : b.price) * b.quantity,
-                        //     0
-                        //   )
-                        //   .toFixed(2)}
-                        // ${" "}
-//                   <p>
-//                   <button onClick={() => handleUSer()} className="btn btn-outline-success w-100 my-3 d-block">
-//                     Sifarisi tamamla
-//                   </button>
-//                   <button
-//                     onClick={() => dispatch(ClearAll())}
-//                     className="btn btn-outline-danger"
-//                   >
-//                     Remove 
-//                   </button>
-//                 </div>
-//               </Grid>
-//             </Grid>
-//           ) : (
-//             <h1 className="p">Cart Is Empty</h1>
-//           )}
-//         </Container>
-//       </section>
+                    .dnone {
+                        display: none;
+                    }
+                }
+                td{
+                    font-size: 9px;
+                    // padding: 10px;
+                    svg{
+                        width: 50%;
+                    }
+                }
+            }
+        }
+        table,
+        th,
+        td,
+        tr{
+            padding: 10px;
+        }
+    }
+}
 
 
-
-
-
-// <div id="cart">
-// <div className="container">
-//   <h3>My cart</h3>
-//   <div className="container">
-//     <div className="top">
-//       <table>
-//         <tr>
-//           <th>Photo</th>
-//           <th>Product Name</th>
-//           <th>Count</th>
-//           <th className="dnone">Price</th>
-//           <th className="dnone">Total Price</th>
-//         </tr>
-
-//         {cartitems.length > 0 ?
-//           cartitems.map((product) => (
-//             <tr>
-//               <td>
-//                 <img
-
-//                   src={product.photo}
-//                   alt=""
-//                 />
-//               </td>
-//               <td>{product.name}</td>
-//               <td className="dnone">
-//                 <button
-//                   onClick={() =>
-//                     dispatch(handlerAddToCart(product.id, -1))
-//                   }
-//                   className="btn btn-lg "
-//                 >
-//                   -
-//                 </button>
-//                 {product.quantity}
-//                 <button
-//                   onClick={() => dispatch(handlerAddToCart(product.id, 1))}
-//                   className="btn btn-lg "
-//                 >
-//                   +
-//                 </button>
-//               </td>
-//               <td className="dnone">
-
-//                 {product.discount ? (
-//                   <>
-//                     <del>{product.price}Azn</del>
-//                     <span>{product.discount}Azn</span>
-//                   </>
-//                 ) : (
-//                   <span>{product.price}Azn</span>
-//                 )}
-//               </td>
-//               <td>
-//                 {
-//                   ((product.discount > 0 ? product.discount : product.price) *
-//                     product.quantity
-//                   ).toFixed(2)
-//                 }
-
-
-//               </td>
-//               <td>
-//                 <div className="d-flex">
-
-//                   <div style={{ cursor: 'pointer' }} className="icon1"
-//                     onClick={() => dispatch(RemoveCart(product.id))}
-//                   >
-
-//                     <ClearIcon />
-//                   </div>
-//                 </div>
-//               </td>
-//             </tr>
-
-//           )) : (
-//             "No products added to the cart"
-//           )
-//         }
-//       </table>
-//     </div>
-//     <div className="bottom">
-//       <div className="container">
-//         <div className="bottom">
-//           <div className="row">
-//             <div className="col-lg-7">
-//               <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-//                 <button className="shoppingButton">
-//                   Continue shopping
-//                 </button></Link>
-//             </div>
-//             <div className="col-lg-5">
-//               <h3>Total</h3>
-//               <table>
-
-//                 <tr>
-//                   <td>
-//                     <div className="row justify-content-between align-items-center">
-//                       <div className="col-lg-8">Total price</div>
-//                       <div className="col-lg-4 price">
-//                         {cartitems
-//                           .reduce(
-//                             (total, b) =>
-//                               total +
-//                               (b.discount > 0 ? b.discount : b.price) * b.quantity,
-//                             0
-//                           )
-//                           .toFixed(2)}
-//                         Azn{" "}</div>
-
-//                     </div>
-//                   </td>
-//                 </tr>
-//               </table>
-//               {/* <div className="komplate"> */}
-//               <button onClick={() => generatePDF()} className="btn btn-outline-success w-100 my-3 d-block">
-//                 Sifarisi tamamla
-//               </button>
-//               {/* <button
-//                   onClick={() => dispatch(ClearAll())}
-//                 >
-//                   Remove All
-//                 </button> */}
-//             </div>
-
-//             {/* </div> */}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// </div>
-// </div>

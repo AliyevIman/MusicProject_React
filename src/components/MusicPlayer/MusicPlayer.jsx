@@ -14,7 +14,7 @@ const MusicPlayer = () => {
 
   const [Music, setMusic] = useState([]);
   const [list, setList] = useState([]);
-  console.log(albumitems);
+  // console.log(albumitems);
   useEffect(() => {
     fetch(BASE_URL + "api/Musician/GetAll").then(c => c.json()).then(setMusic);
   }, []);

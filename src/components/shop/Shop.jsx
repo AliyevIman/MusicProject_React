@@ -1,20 +1,12 @@
-import { Container, Grid, iconButtonClasses } from "@mui/material";
-import React from "react";
+import { Box, Container, Grid, iconButtonClasses, Modal, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import jsPDF from "jspdf";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
-import {
-  AddToCart,
-  ClearAll,
-  RemoveCart,
-} from "../../Redux/Actions/CartAction";
+import { AddToCart, ClearAll, RemoveCart, } from "../../Redux/Actions/CartAction";
 import "../shop/Shop.scss";
-import { useEffect } from "react";
-import PdfViewerComponent from "../ticketPDF/PdfViewerComponent";
-import { useState } from "react";
-import { EffectCoverflow } from "swiper";
-import { Alarm } from "@mui/icons-material";
+
 import Swal from "sweetalert2";
 const Shop = () => {
   const { userInfo } = useSelector(st => st.loginUser);
@@ -33,11 +25,7 @@ const Shop = () => {
       }
     }
   };
-  //   constructor(props){
-  //     super(props);
-  //     this.state ={};
-  // }
-  // console.log(cartitems);
+
 
   const generatePDF = () => {
 
@@ -75,6 +63,20 @@ const Shop = () => {
     )
   }
 
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -89,7 +91,7 @@ const Shop = () => {
       <section id="cart">
         <div className="container">
           {cartitems.length > 0 ? (
-            <div className="container">
+            <div >
               <div className="top">
 
                 <table
@@ -112,7 +114,7 @@ const Shop = () => {
                         />
                       </td>
                       <td id="nm">{cart.name}</td>
-                      <td className="d-flex justify-content-center align-items-center " style={{ border: 'none' }}>
+                      <td  style={{ border: 'none' }}>
                         <button
                           onClick={() =>
                             dispatch(handlerAddToCart(cart.id, -1))
@@ -166,7 +168,6 @@ const Shop = () => {
                 </table>
               </div>
               <div className="bottom"  >
-                <div className="container">
                   <div className="bottom">
 
                     <div className="row">
@@ -202,9 +203,27 @@ const Shop = () => {
                             </td>
                           </tr>
                         </table>
-                        <button onClick={() => handleUSer()} className="btn btn-outline-success w-100 my-3 d-block">
+                        <button onClick={handleOpen} className="btn btn-outline-success w-100 my-3 d-block">
                           Sifarisi tamamla
                         </button>
+                        <Modal
+                          open={open}
+                          onClose={handleClose}
+                          aria-labelledby="modal-modal-title"
+                          aria-describedby="modal-modal-description"
+                        >
+                          <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Sifarisi tamamlamaq isdeyirsiz?
+                            </Typography>
+                            <button onClick={()=>handleUSer()} className="btn btn-outline-success w-100 my-3 d-block">
+                               Tamamlama 
+                            </button>
+                            <button onClick={()=>handleClose()} className="btn btn-outline-danger w-100 my-3 d-block">
+                               Close
+                            </button>
+                          </Box>
+                        </Modal>
                         <button
                           onClick={() => dispatch(ClearAll())}
                           className="btn btn-outline-danger"
@@ -214,7 +233,6 @@ const Shop = () => {
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
 

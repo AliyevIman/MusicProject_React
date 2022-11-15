@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import { useCallback } from 'react';
 const BeArtist = () => {
 
-  const child = useCallback(() => <ArtistHeader />, []);
+
 
   const validationSchema = Yup.object().shape({
     accept: Yup.bool()
@@ -38,13 +38,12 @@ const BeArtist = () => {
     var decode = jwtDecode(userInfo.token.result.token);
   }
 
-  // console.log(decode);
   const submitForm = (data, e) => {
     console.log(data);
     try {
       e.preventDefault();
-      // && email !== "" && roleName !== ""
       if (userInfo && data.accept == true && data.accept2 == true) {
+
         const obj = {
           email: userInfo.email,
           roleName: "Artist"
@@ -58,14 +57,8 @@ const BeArtist = () => {
           timer: 1500,
         })
 
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "pealse check a boxes ",
-          showConfirmButton: false,
-          timer: 1500,
-        })
       }
+
 
     } catch (error) {
       Swal.fire({
@@ -79,10 +72,7 @@ const BeArtist = () => {
 
   return (
     <>
-      {/* {
-      isLoading==false&&
-      <Loading/>
-    } */}
+
       <section id="pager-section">
         <div className="album-bg"></div>
         <div className="container">
@@ -93,7 +83,7 @@ const BeArtist = () => {
       </section>
       {
         userInfo && decode.role[0] === "Artist" ? (
-         {child}
+          <ArtistHeader />
         ) : (
           <section>
             {

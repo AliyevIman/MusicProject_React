@@ -131,3 +131,22 @@
         }
     }
 }
+
+@media( min-width:320px) and ( max-width:768px){
+    #pager-section{
+        .pager-content{
+            h2{
+                font-size: 58px;
+            }
+        }
+    }
+}
+@media(max-width:350px){
+    #pager-section{
+        .pager-content{
+            h2{
+                font-size: 40px;
+            }
+        }
+    }
+}
