@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../api/BaseConfig";
 import Loading from "../../components/LoadingError/Loading";
 import { AlbumAction } from "../../Redux/Actions/AlbumAction";
-import "./Album.scss";
+// import "./Album.scss";
 const AlbumDiscover = () => {
   const [album, setAlbum] = useState([]);
   console.log(album);

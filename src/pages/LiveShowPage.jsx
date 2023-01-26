@@ -1,6 +1,6 @@
 import React from 'react'
 import LiveShow from '../components/liveShows/LiveShow'
-import "../App.scss"
+// import "../App.scss"
 const LiveShowPage = () => {
     return (
         <section id='LiveShow'>
