@@ -22,7 +22,13 @@ import { useLayoutEffect } from "react";
 import { Fragment } from "react";
 import RemoveIcon from '@mui/icons-material/Remove';
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
+import { gapi } from "gapi-script";
 const Header = () => {
+  //session 
+  // var accesstoken = gapi.auth.getToken().id_token;
+  // console.log(gapi.auth.getToken());
+  //session 
+
   const [show, setShow] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -30,10 +36,15 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   const myUser = useSelector((state) => state.loginUser);
   const { userInfo } = useSelector(st => st.loginUser);
-
-  if (userInfo) {
+  // if (gapi.auth.getToken()) {
+  // const googleDecode =jwtDecode(gapi.auth.getToken().id_token)
+  // }
+  if (userInfo ) {
     var decode = jwtDecode(userInfo.token.result.token);
   }
+  // if (gapi.auth) {
+  //   var decode = jwtDecode(accestoken);
+  // }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -99,7 +110,7 @@ const Header = () => {
                   </div>
                 </Link>
               </li>
-              {myUser && myUser.userInfo && myUser.userInfo.token ? (
+              {myUser && myUser.userInfo && myUser.userInfo.token  ? (
                 // <li className="email-box">
                 //   <Link className="user-email" to="#">
                 //     <span>{myUser.userInfo.email}</span>

@@ -8,8 +8,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { registerAction } from '../Redux/Actions/UserAction';
 import { CLEAR_USER_REGISTER } from '../Redux/Constants/UserConstants';
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
 // import { useForm } from "react-hook-form";
 const Register = () => {
+    // Google siginUp 
+    const [profile, setProfile] = useState([]);
+    const clientId = '69753538296-a5ecnn0rbc3921r2lu6soj658a4t4v3a.apps.googleusercontent.com';
+  console.log(profile);
+    useEffect(() => {
+      function start(){
+        gapi.client.init({
+          clientId: clientId,
+          scope: ''
+        });
+      };
+      gapi.load('client:auth2', start);
+    });
+    // Google siginUp 
   const { register, handleSubmit, formState: { errors } } = useForm();
   
   const [error, setError] = useState("")
@@ -47,6 +63,18 @@ const Register = () => {
     }
 
   }, [userInfo, navi])
+  //
+  
+  const onSuccess = (res) => {
+    setProfile(res.profileObj);
+  };
+console.log(profile)
+  const logOut = () => {
+    setProfile(null);
+  };
+  const onFailure = (err) => {
+    console.log('failed:', err);
+  };
   return (
     <>
       <section id='LiveShow'>
@@ -77,6 +105,7 @@ const Register = () => {
               <div className="form-outline mb-4">
                 <input
                   placeholder="Firstname"
+                  
                   type="name"
                   id="form2Example1"
                   className="form-control"
@@ -202,6 +231,14 @@ const Register = () => {
                 </button> */}
               </div>
             </form>
+            <GoogleLogin
+              clientId={clientId}
+              buttonText="Sign in with Google"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={'single_host_origin'}
+              isSignedIn={true}
+            />
           </div>
         </div>
       </div>

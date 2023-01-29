@@ -18,14 +18,17 @@ import AddMusic from '../components/BeArtist/AddMusic'
 const MyRoutes = () => {
   return (
     <Routes>
+    <Route path="/login" element={<Login/>}/>
+
     <Route path="/" element={<Home/>}/>
+
     <Route path="/shop" element={<Shop/>} />
     <Route path='/albumdisc' element={<AlbumDiscover/>} />
     <Route path="/register" element={<Register/>}/>
-    <Route path="/login" element={<Login/>}/>
     <Route path="/liveshow" element={<LiveShowPage/>}/>
     <Route path="/artist" element={<BeArtist/>}/>
     <Route path="/addlive" element={<AddLiveShow/>}/>
+
     <Route path="/addalbum" element={<AddAlbum/>}/>
     <Route path="/addmusic" element={<AddMusic/>}/>
 

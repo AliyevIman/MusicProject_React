@@ -7,7 +7,30 @@ import { CLEAR_USER } from '../Redux/Constants/UserConstants';
 import Swal from 'sweetalert2';
 import { Alert } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { gapi } from 'gapi-script';
+import GoogleLogin from 'react-google-login';
+
 const Login = () => {
+    // Google siginUp 
+    const [profile, setProfile] = useState([]);
+    const clientId = '69753538296-a5ecnn0rbc3921r2lu6soj658a4t4v3a.apps.googleusercontent.com';
+  console.log(profile);
+  useEffect(() => {
+    function start(){
+      gapi.client.init({
+        clientId: clientId,
+        scope: ''
+      });
+    };
+    gapi.load('client:auth2', start);
+    sessionStorage.setItem("edfewf", profile)
+    if (profile.googleId) {
+      navi("/")
+    }
+  });
+
+    // Google siginUp 
+
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [errorMessage, setErrorMessage] = useState("")
@@ -29,8 +52,8 @@ const Login = () => {
 
       if (userInfo.status === 200) {
 
-     navi('/')
-      }else{
+        navi('/')
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'Bir xəta baş verdi.',
@@ -40,7 +63,19 @@ const Login = () => {
 
     }
   }, [userInfo, navi])
+  // ----------Google ----
+  //
+  
+  const onSuccess = (res) => {
+    setProfile(res.profileObj);
+  };
 
+  const logOut = () => {
+    setProfile(null);
+  };
+  const onFailure = (err) => {
+    console.log('failed:', err);
+  };
   return (
     <>
 
@@ -154,6 +189,14 @@ const Login = () => {
                 </button> */}
               </div>
             </form>
+            <GoogleLogin
+              clientId={clientId}
+              buttonText="Sign in with Google"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={'single_host_origin'}
+              isSignedIn={true}
+            />
           </div>
         </div>
       </div>
