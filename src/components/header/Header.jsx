@@ -36,10 +36,12 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   const myUser = useSelector((state) => state.loginUser);
   const { userInfo } = useSelector(st => st.loginUser);
+  const loginData  = localStorage.getItem('loginData')
+  console.log(loginData.googleId);
   // if (gapi.auth.getToken()) {
   // const googleDecode =jwtDecode(gapi.auth.getToken().id_token)
   // }
-  if (userInfo ) {
+  if (userInfo) {
     var decode = jwtDecode(userInfo.token.result.token);
   }
   // if (gapi.auth) {
@@ -69,7 +71,7 @@ const Header = () => {
   // }, [])
   return (
     <div className="Header" >
-      <MusicPlayer/>
+      <MusicPlayer />
 
       <div className="container-fluid ">
         <div className="header-content d-flex justify-content-between align-item-center">
@@ -110,7 +112,7 @@ const Header = () => {
                   </div>
                 </Link>
               </li>
-              {myUser && myUser.userInfo && myUser.userInfo.token  ? (
+              {myUser && myUser.userInfo && myUser.userInfo.token ? (
                 // <li className="email-box">
                 //   <Link className="user-email" to="#">
                 //     <span>{myUser.userInfo.email}</span>
@@ -181,7 +183,7 @@ const Header = () => {
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                   >
                     <MenuItem>
-                      <Avatar /> Profile :{myUser.userInfo.email}
+                      <Avatar /> Profile :{myUser.userInfo.email  }
                     </MenuItem>
                     {/* <MenuItem>
                       <Avatar /> My account
@@ -287,25 +289,25 @@ const Header = () => {
                   <li><Link to="/albumdisc">Albums</Link> </li>
                   <li><Link to="/liveshow">Live Shows</Link> </li>
                   {
-userInfo&&
-                  <li className="menu-item-has-children">
-                    <a href="#">Account   <span onClick={() => setIsOpen(!isOpen)}>  { !isOpen? <AddIcon />:<RemoveIcon/> }</span>  </a>
-                    {
-                      isOpen &&
+                    userInfo &&
+                    <li className="menu-item-has-children">
+                      <a href="#">Account   <span onClick={() => setIsOpen(!isOpen)}>  {!isOpen ? <AddIcon /> : <RemoveIcon />}</span>  </a>
+                      {
+                        isOpen &&
 
-                      <ul className="list-unstyled second-open">
-                        <li>
-                          <Link to='/register'>Add another account</Link>
-                        </li>
-                        <li>
-                          <Link to={`/useralbum/${decode.Id}`}>See Your Album</Link>
-                        </li>
-                        <li>
-                          <Link to={`/usermusics/${decode.Id}`}>See Your Musics</Link>
-                        </li>
-                      </ul>
-                    }
-                  </li>
+                        <ul className="list-unstyled second-open">
+                          <li>
+                            <Link to='/register'>Add another account</Link>
+                          </li>
+                          <li>
+                            <Link to={`/useralbum/${decode.Id}`}>See Your Album</Link>
+                          </li>
+                          <li>
+                            <Link to={`/usermusics/${decode.Id}`}>See Your Musics</Link>
+                          </li>
+                        </ul>
+                      }
+                    </li>
                   }
                   {
                     myUser && myUser.userInfo && myUser.userInfo.token ? (
