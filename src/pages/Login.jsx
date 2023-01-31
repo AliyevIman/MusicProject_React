@@ -1,38 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginAction } from '../Redux/Actions/UserAction'
+import { googleLoginAction, loginAction } from '../Redux/Actions/UserAction'
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CLEAR_USER } from '../Redux/Constants/UserConstants';
 import Swal from 'sweetalert2';
 import { Alert } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { gapi } from 'gapi-script';
-import GoogleLogin from 'react-google-login';
-import GoogleAuthLogin from '../components/GoogleAuth/login';
-import GoogleAuthLogout from '../components/GoogleAuth/logout';
+import { auth, provider } from '../components/GoogleAuth/config'
 
 const Login = () => {
+  const navi = useNavigate();
+
   // Google siginUp 
-  // const [profile, setProfile] = useState([]);
-  // console.log(profile);
-  // useEffect(() => {
-  //   function start() {
-  //     gapi.client.init({
-  //       clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-  //       scope: ''
-  //     });
-  //   };
-  //   gapi.load('client:auth2', start);
-  //   // sessionStorage.setItem("edfewf", profile)
+  const [value, setValue] = useState('')
+  const handleClick = () => {
+    dispatch(googleLoginAction(auth,provider))
 
-  // });
+  }
+  const { googleInfo } = useSelector(st => st.googleLogin);
 
-  // useEffect(() => {
-  //   if (profile.googleId) {
-  //     navi("/")
-  //   }
-  // }, [profile, navi])
+  useEffect(() => {
+    setValue(localStorage.getItem('userInfo'))
+    if(googleInfo){
+      navi("/")
+    }
+  },[value,navi])
 
   // Google siginUp 
 
@@ -40,7 +33,6 @@ const Login = () => {
 
   const [errorMessage, setErrorMessage] = useState("")
   const dispatch = useDispatch();
-  const navi = useNavigate();
   const { userInfo } = useSelector(st => st.loginUser);
   // console.log(userInfo);
   const submitForm = (data, e) => {
@@ -69,18 +61,7 @@ const Login = () => {
     }
   }, [userInfo, navi])
   // ----------Google ----
-  //
 
-  // const onSuccess = (res) => {
-  //   setProfile(res.profileObj);
-  // };
-
-  // const logOut = () => {
-  //   setProfile(null);
-  // };
-  // const onFailure = (err) => {
-  //   console.log('failed:', err);
-  // };
   return (
     <>
 
@@ -194,16 +175,10 @@ const Login = () => {
                 </button> */}
               </div>
             </form>
-            {/* <GoogleLogin
-              clientId={clientId}
-              buttonText="Sign in with Google"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={'single_host_origin'}
-              isSignedIn={true}
-            /> */}
-            <GoogleAuthLogin />
-            <GoogleAuthLogout />
+            {value ? navi('/') : (
+              <button onClick={handleClick}>Sign With Google</button>
+
+            )}
 
           </div>
         </div>

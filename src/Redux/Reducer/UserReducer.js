@@ -1,6 +1,24 @@
 import { error } from "jquery";
 import { CLEAR_USER, CLEAR_USER_REGISTER, USER_BEARTIST_ERROR, USER_BEARTIST_REQUEST, USER_BEARTIST_SUCCESS, USER_EDIT_ERROR, USER_EDIT_SUCCESS, USER_LOGIN_ERROR, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_ERROR, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../Constants/UserConstants";
 
+
+
+export const GoogleAuthReducer=(state={},action)=>{
+    switch (action.type) {
+    
+        case "GOOGLE_SIGIN_SUCCESS":
+            return {loading:true,googleInfo:action.payload} 
+            case "GOOGLE_SIGIN_ERROR":
+                return {loading:false,googleInfo:action.paload}
+                // case CLEAR_USER_REGISTER:
+                //     return {}
+        default:
+            return state;
+    }
+
+}
+
+
 export const RegisterReducer=(state={},action)=>{
 
     switch (action.type) {

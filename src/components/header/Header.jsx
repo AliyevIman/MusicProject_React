@@ -1,33 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../header/Header.scss";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../Redux/Actions/UserAction";
 import CloseIcon from '@mui/icons-material/Close';
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import jwtDecode from "jwt-decode";
 import { Box } from "@mui/system";
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
-import { useRef } from "react";
-import { useLayoutEffect } from "react";
-import { Fragment } from "react";
 import RemoveIcon from '@mui/icons-material/Remove';
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
-import { gapi } from "gapi-script";
 const Header = () => {
-  //session 
-  // var accesstoken = gapi.auth.getToken().id_token;
-  // console.log(gapi.auth.getToken());
-  //session 
+
 
   const [show, setShow] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -36,17 +24,14 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   const myUser = useSelector((state) => state.loginUser);
   const { userInfo } = useSelector(st => st.loginUser);
-  const loginData  = localStorage.getItem('loginData')
-  console.log(loginData.googleId);
-  // if (gapi.auth.getToken()) {
-  // const googleDecode =jwtDecode(gapi.auth.getToken().id_token)
-  // }
+  const { googleInfo } = useSelector(st => st.googleLogin);
+
+  console.log(googleInfo);
+
   if (userInfo) {
     var decode = jwtDecode(userInfo.token.result.token);
   }
-  // if (gapi.auth) {
-  //   var decode = jwtDecode(accestoken);
-  // }
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -112,7 +97,7 @@ const Header = () => {
                   </div>
                 </Link>
               </li>
-              {myUser && myUser.userInfo && myUser.userInfo.token ? (
+              {myUser && myUser.userInfo && myUser.userInfo.token ||googleInfo ? (
                 // <li className="email-box">
                 //   <Link className="user-email" to="#">
                 //     <span>{myUser.userInfo.email}</span>
@@ -183,7 +168,9 @@ const Header = () => {
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                   >
                     <MenuItem>
-                      <Avatar /> Profile :{myUser.userInfo.email  }
+                      <Avatar /> Profile :{
+                      myUser.userInfo?myUser.userInfo.email : googleInfo.email
+                    }
                     </MenuItem>
                     {/* <MenuItem>
                       <Avatar /> My account
@@ -198,7 +185,7 @@ const Header = () => {
                         Add another account
                       </Link>
                     </MenuItem>
-                    <MenuItem>
+                    {/* <MenuItem>
                       <ListItemIcon>
                         <SendIcon fontSize="small" />
                       </ListItemIcon>
@@ -213,7 +200,7 @@ const Header = () => {
                       <Link style={{ textDecoration: "none", color: "#202020" }} to={`/usermusics/${decode.Id}`}>
                         <span>See Your Musics</span>
                       </Link>
-                    </MenuItem>
+                    </MenuItem> */}
                     {/* <MenuItem>
                       <ListItemIcon>
                         <Settings fontSize="small" />

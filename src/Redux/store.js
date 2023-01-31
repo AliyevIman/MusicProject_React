@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { Cartreducer } from "./Reducer/CartReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { albumListReducers, AlbumReducer, albumReducers, albumUserListReducers } from "./Reducer/AlbumReducer";
-import { BeArtistReducer, LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
+import { BeArtistReducer, GoogleAuthReducer, LoginReducer, RegisterReducer } from "./Reducer/UserReducer";
 import { muisicDeleteReducers, muisicEditReducers, muisicListReducers, muisicReducers, musicUpdateReducer } from "./Reducer/MusicReducer";
 import { liveDeleteReducers, liveEditReducers, liveListReducers, liveReducers, liveUpdateReducer } from "./Reducer/LiveShowReducer";
 import { musicfileReducers, photoReducers } from "./Reducer/FileReducer";
@@ -14,6 +14,7 @@ const reducer   =combineReducers({
     register:RegisterReducer,
     loginUser :LoginReducer,
     role:BeArtistReducer,
+    googleLogin:GoogleAuthReducer,
     //music
     addedMusicRed:muisicReducers,
     muiscList:muisicListReducers,
@@ -38,9 +39,16 @@ const reducer   =combineReducers({
 
 
 })
+
 const userInfoFromLS=localStorage.getItem("userInfo") ?
  JSON.parse(localStorage.getItem("userInfo"))
  :null
+
+
+  const googleInfoFromLS=localStorage.getItem("googleInfo") ?
+ JSON.parse(localStorage.getItem("googleInfo"))
+ :null
+
 const cartItemsFromLocal = localStorage.getItem("cartitems" )?
 JSON.parse(localStorage.getItem("cartitems")):[] 
 
@@ -55,6 +63,9 @@ JSON.parse(localStorage.getItem("albumitems")):[]
 const initialState={
     loginUser:{
         userInfo:userInfoFromLS
+    },
+    googleLogin:{
+        googleInfo:googleInfoFromLS
     },
       album:{
         albumitems:albumItemsFromLocal
