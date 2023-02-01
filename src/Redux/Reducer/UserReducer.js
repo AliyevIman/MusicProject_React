@@ -10,8 +10,10 @@ export const GoogleAuthReducer=(state={},action)=>{
             return {loading:true,googleInfo:action.payload} 
             case "GOOGLE_SIGIN_ERROR":
                 return {loading:false,googleInfo:action.paload}
-                // case CLEAR_USER_REGISTER:
-                //     return {}
+                case "CLEAR_GOOGLE_USER":
+                    return {}
+                case "USER_GOOGLE_LOGOUT":
+                    return {googleInfo:null}
         default:
             return state;
     }

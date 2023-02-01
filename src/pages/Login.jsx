@@ -13,19 +13,17 @@ const Login = () => {
   const navi = useNavigate();
 
   // Google siginUp 
-  const [value, setValue] = useState('')
   const handleClick = () => {
-    dispatch(googleLoginAction(auth,provider))
+    dispatch(googleLoginAction(auth, provider))
 
   }
   const { googleInfo } = useSelector(st => st.googleLogin);
 
   useEffect(() => {
-    setValue(localStorage.getItem('userInfo'))
-    if(googleInfo){
+    if (googleInfo) {
       navi("/")
     }
-  },[value,navi])
+  }, [googleInfo, navi])
 
   // Google siginUp 
 
@@ -38,7 +36,6 @@ const Login = () => {
   const submitForm = (data, e) => {
     e.preventDefault();
     dispatch(loginAction(data))
-
   }
 
 
@@ -96,6 +93,7 @@ const Login = () => {
               <div className="form-outline mb-4">
                 <input
                   type="email"
+                  value={googleInfo?.email}
                   id="form2Example1"
                   {...register("email",
                     {
@@ -175,10 +173,9 @@ const Login = () => {
                 </button> */}
               </div>
             </form>
-            {value ? navi('/') : (
-              <button onClick={handleClick}>Sign With Google</button>
+        
+              <button className='btn btn-google btn-block  btn-outline' onClick={handleClick}> <img className='img-fluid' src="https://img.icons8.com/color/16/000000/google-logo.png" /> Sign With Google</button>
 
-            )}
 
           </div>
         </div>

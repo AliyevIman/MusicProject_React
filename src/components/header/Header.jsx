@@ -4,7 +4,7 @@ import "../header/Header.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../../Redux/Actions/UserAction";
+import { logouGoogletAction, logoutAction } from "../../Redux/Actions/UserAction";
 import CloseIcon from '@mui/icons-material/Close';
 import jwtDecode from "jwt-decode";
 import { Box } from "@mui/system";
@@ -26,7 +26,7 @@ const Header = () => {
   const { userInfo } = useSelector(st => st.loginUser);
   const { googleInfo } = useSelector(st => st.googleLogin);
 
-  console.log(googleInfo);
+  // console.log(googleInfo);
 
   if (userInfo) {
     var decode = jwtDecode(userInfo.token.result.token);
@@ -77,7 +77,7 @@ const Header = () => {
                 <Link to="/liveshow">Live</Link>
               </li>
               {
-                myUser && myUser.userInfo && myUser.userInfo.token &&
+                myUser && myUser.userInfo && myUser.userInfo.token || googleInfo &&
                 <li>
                   <Link to="/artist">Artist</Link>
                 </li>
@@ -97,7 +97,7 @@ const Header = () => {
                   </div>
                 </Link>
               </li>
-              {myUser && myUser.userInfo && myUser.userInfo.token ||googleInfo ? (
+              {myUser && myUser.userInfo && myUser.userInfo.token || googleInfo ? (
                 // <li className="email-box">
                 //   <Link className="user-email" to="#">
                 //     <span>{myUser.userInfo.email}</span>
@@ -128,7 +128,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                       >
-                        <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+                        <Avatar src={googleInfo.photoURL} sx={{ width: 32, height: 32 }}></Avatar>
                       </IconButton>
                     </Tooltip>
                   </Box>
@@ -168,9 +168,9 @@ const Header = () => {
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                   >
                     <MenuItem>
-                      <Avatar /> Profile :{
-                      myUser.userInfo?myUser.userInfo.email : googleInfo.email
-                    }
+                      <Avatar src={googleInfo.photoURL}  /> Profile :{
+                        myUser.userInfo ? myUser.userInfo.email : googleInfo.email
+                      }
                     </MenuItem>
                     {/* <MenuItem>
                       <Avatar /> My account
@@ -207,18 +207,39 @@ const Header = () => {
                       </ListItemIcon>
                       Settings
                     </MenuItem> */}
-                    <MenuItem onClick={() => dispatch(logoutAction())}>
-                      <ListItemIcon >
-                        <Logout fontSize="small" />
-                      </ListItemIcon >
+                    {
+                      myUser.userInfo && myUser.userInfo.token ?(
+                        <MenuItem onClick={() => dispatch(logoutAction())}>
+                          <ListItemIcon >
+                            <Logout fontSize="small" />
+                          </ListItemIcon >
 
-                      {" "}
-                      <a style={{ textDecoration: "none", color: "#202020" }} >
-                        Sign Out{" "}
+                          {" "}
+                          <a style={{ textDecoration: "none", color: "#202020" }} >
+                            Sign Out{" "}
 
-                      </a>
+                          </a>
 
-                    </MenuItem>
+                        </MenuItem>
+                      ) :(
+
+                        <MenuItem onClick={() => dispatch(logouGoogletAction())}>
+                        <ListItemIcon >
+                          <Logout fontSize="small" />
+                        </ListItemIcon >
+
+                        {" "}
+                        <a style={{ textDecoration: "none", color: "#202020" }} >
+                          Sign Out {" "}
+
+                        </a>
+
+                      </MenuItem>
+                      )
+                      
+                    
+                    }
+
                   </Menu>
                 </React.Fragment>
               ) : (

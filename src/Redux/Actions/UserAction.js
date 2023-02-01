@@ -22,6 +22,10 @@ export const googleLoginAction = (auth, provider) => (dispatch) => {
         })
     }
 }
+export const logouGoogletAction = () => (dispatch) => {
+    localStorage.removeItem("googleInfo")
+    dispatch({ type: "USER_GOOGLE_LOGOUT" })
+}
 
 
 

@@ -9,7 +9,9 @@ import store from './Redux/store';
 import MusicPlayer from './components/MusicPlayer/MusicPlayer';
 
 function App() {
-  
+const   componentDidMount=() =>{
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }
   return (
 <>
   <BrowserRouter>
@@ -17,6 +19,11 @@ function App() {
       <Header/>
        <MyRoutes/>
       <Footer/>
+      <ins className='adsbygoogle'
+          style={{ display: 'block' }}
+          data-ad-client='ca-pub-12121212'
+          data-ad-slot='12121212'
+          data-ad-format='auto' />
       </Provider>
    </BrowserRouter>
 </>
